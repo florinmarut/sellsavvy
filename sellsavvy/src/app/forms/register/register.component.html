@@ -1,0 +1,3 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+</form>
