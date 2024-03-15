@@ -14,14 +14,7 @@ export class CrudService {
     private readonly _config: ConfigService,
     private readonly _http: HttpClient
   ) {
-    _config.loadConfig().subscribe({
-      next: (configurations) => {
-        this._configurations = configurations;
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
+    this._configurations = this._config.getConfig();
   }
 
   get<Type>(
@@ -65,12 +58,7 @@ export class CrudService {
     ) as Observable<Type>;
   }
 
-  put<Type>(
-    id: string | null,
-    data: any,
-    route: string,
-    qp: QueryParams = {}
-  ) {
+  put<Type>(id: string | null, data: any, route: string, qp: QueryParams = {}) {
     const query = formatQueryUrl(qp);
     return this._http.put(
       `${this._configurations.host}:${this._configurations.port}/${route}${

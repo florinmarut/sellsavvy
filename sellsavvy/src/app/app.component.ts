@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RegisterForm } from './forms/register/register.component';
 
@@ -11,4 +11,6 @@ import { RegisterForm } from './forms/register/register.component';
 })
 export class AppComponent {
   title = 'sellsavvy';
+
+  constructor() {}
 }
