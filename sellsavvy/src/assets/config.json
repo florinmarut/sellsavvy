@@ -1,0 +1,12 @@
+{
+    "host": "http://localhost:5017",
+    "addresses": {
+        "addresses": "/addresses",
+        "articles": "/articles",
+        "cartItems": "/cartItems",
+        "orderItems": "/orderItems",
+        "orders": "/orders",
+        "reviews": "/reviews",
+        "users": "/users"
+    }
+}
