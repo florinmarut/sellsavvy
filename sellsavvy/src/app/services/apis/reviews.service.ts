@@ -7,7 +7,7 @@ import {
   ReviewCreateDTO,
   ReviewDTO,
   ReviewUpdateDTO,
-} from '../../models/review.model';
+} from '../../models/dtos/review.model';
 
 @Injectable({
   providedIn: 'root',

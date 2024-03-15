@@ -1,5 +1,5 @@
 import { Address } from 'cluster';
-import { OrderStatus } from './constants.const';
+import { OrderStatus } from '../constants.const';
 import { UserDTO } from './user.model';
 import { OrderItemDTO } from './order-item.model';
 

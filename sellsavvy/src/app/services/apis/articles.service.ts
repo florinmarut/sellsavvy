@@ -6,7 +6,7 @@ import {
   ArticleCreateDTO,
   ArticleDTO,
   ArticleUpdateDTO,
-} from '../../models/article.model';
+} from '../../models/dtos/article.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

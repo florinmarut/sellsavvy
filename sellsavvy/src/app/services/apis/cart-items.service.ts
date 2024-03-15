@@ -7,7 +7,7 @@ import {
   CartItemCreateDTO,
   CartItemDTO,
   CartItemUpdateDTO,
-} from '../../models/cart-item.model';
+} from '../../models/dtos/cart-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,5 +45,12 @@ export class CartItemsService {
 
   deleteCartItem(id: string, params?: QueryParams): Observable<any> {
     return this._crud.delete(id, this.ROUTE, params);
+  }
+
+  getCartItemsByUserId(
+    id: string,
+    params?: QueryParams
+  ): Observable<Array<CartItemDTO>> {
+    return this._crud.get(id, this.ROUTE + '/user', params);
   }
 }

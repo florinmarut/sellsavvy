@@ -5,7 +5,7 @@ export default interface Config {
 }
 
 export interface Address {
-  [key: string]: string;
+  [key: string]: string | Address;
 }
 
 export interface QueryParams {

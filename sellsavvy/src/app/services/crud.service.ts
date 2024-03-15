@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Config, { QueryParams } from '../models/config.model';
+import Config, { Address, QueryParams } from '../models/config.model';
 import { Observable } from 'rxjs';
 import { formatQueryUrl } from '../utils/utils';
 import { ConfigService } from './config.service';
@@ -19,7 +19,7 @@ export class CrudService {
 
   get<Type>(
     id: string | null,
-    route: string,
+    route: string | Address,
     qp: QueryParams = {}
   ): Observable<Type> {
     const query = formatQueryUrl(qp);
@@ -32,7 +32,7 @@ export class CrudService {
 
   delete<Type>(
     id: string | null,
-    route: string,
+    route: string | Address,
     qp: QueryParams = {}
   ): Observable<Type> {
     const query = formatQueryUrl(qp);
@@ -46,7 +46,7 @@ export class CrudService {
   post<Type>(
     id: string | null,
     data: any,
-    route: string,
+    route: string | Address,
     qp: QueryParams = {}
   ) {
     const query = formatQueryUrl(qp);
@@ -58,7 +58,7 @@ export class CrudService {
     ) as Observable<Type>;
   }
 
-  put<Type>(id: string | null, data: any, route: string, qp: QueryParams = {}) {
+  put<Type>(id: string | null, data: any, route: string | Address, qp: QueryParams = {}) {
     const query = formatQueryUrl(qp);
     return this._http.put(
       `${this._configurations.host}:${this._configurations.port}/${route}${
@@ -71,7 +71,7 @@ export class CrudService {
   patch<Type>(
     id: string | null,
     data: any,
-    route: string,
+    route: string | Address,
     qp: QueryParams = {}
   ) {
     const query = formatQueryUrl(qp);

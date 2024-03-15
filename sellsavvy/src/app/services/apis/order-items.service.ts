@@ -7,7 +7,7 @@ import {
   OrderItemCreateDTO,
   OrderItemDTO,
   OrderItemUpdateDTO,
-} from '../../models/order-item.model';
+} from '../../models/dtos/order-item.model';
 
 @Injectable({
   providedIn: 'root',

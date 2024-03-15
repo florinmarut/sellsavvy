@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from '../config.service';
 import { CrudService } from '../crud.service';
 import { Observable } from 'rxjs';
-import { AddressCreateDTO, AddressDTO, AddressUpdateDTO } from '../../models/address.model';
+import { AddressCreateDTO, AddressDTO, AddressUpdateDTO } from '../../models/dtos/address.model';
 import { QueryParams } from '../../models/config.model';
 
 @Injectable({

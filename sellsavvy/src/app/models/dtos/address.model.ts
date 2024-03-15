@@ -1,4 +1,4 @@
-import { Country, State } from './constants.const';
+import { Country, State } from '../constants.const';
 import { UserDTO } from './user.model';
 
 export interface AddressCreateDTO {
