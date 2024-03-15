@@ -1,0 +1,42 @@
+import { Injectable } from '@angular/core';
+import { ConfigService } from '../config.service';
+import { CrudService } from '../crud.service';
+import { Observable } from 'rxjs';
+import { AddressCreateDTO, AddressDTO, AddressUpdateDTO } from '../../models/address.model';
+import { QueryParams } from '../../models/config.model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AddressesService {
+  private readonly ROUTE = this._config.getConfig().addresses['addresses'];
+
+  constructor(
+    private readonly _config: ConfigService,
+    private readonly _crud: CrudService
+  ) {}
+
+  getAddresses(params?: QueryParams): Observable<Array<AddressDTO>> {
+    return this._crud.get(null, this.ROUTE, params);
+  }
+
+  getAddress(id: string, params?: QueryParams): Observable<AddressDTO> {
+    return this._crud.get(id, this.ROUTE, params);
+  }
+
+  createAddress(body: AddressCreateDTO, params?: QueryParams): Observable<any> {
+    return this._crud.post(null, body, this.ROUTE, params);
+  }
+
+  updateAddress(
+    id: string,
+    body: AddressUpdateDTO,
+    params?: QueryParams
+  ): Observable<any> {
+    return this._crud.put(id, body, this.ROUTE, params);
+  }
+
+  deleteAddress(id: string, params?: QueryParams): Observable<any> {
+    return this._crud.delete(id, this.ROUTE, params);
+  }
+}

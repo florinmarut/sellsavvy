@@ -5,10 +5,9 @@ export default interface Config {
 }
 
 export interface Address {
-  name: string;
-  url: string;
+  [key: string]: string;
 }
 
 export interface QueryParams {
-    [key: string]: string | number | boolean
+  [key: string]: string | number | boolean;
 }

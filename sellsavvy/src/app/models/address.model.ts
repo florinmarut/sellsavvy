@@ -1,0 +1,16 @@
+import { Country, State } from './constants.const';
+import { UserDTO } from './user.model';
+
+export interface AddressCreateDTO {}
+
+export interface AddressUpdateDTO {}
+
+export interface AddressDTO {
+  id: string;
+  city: string;
+  state: State;
+  country: Country;
+  street: string;
+  zip: string;
+  user: UserDTO;
+}
