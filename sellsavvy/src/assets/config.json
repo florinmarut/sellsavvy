@@ -7,6 +7,8 @@
     "orderItems": "/orderItems",
     "orders": "/orders",
     "reviews": "/reviews",
-    "users": "/users"
+    "users": "/users",
+    "login": "/login",
+    "register": "/register"
   }
 }
