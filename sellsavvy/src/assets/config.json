@@ -1,14 +1,15 @@
 {
-  "host": "http://localhost:5017",
+  "host": "http://localhost",
+  "port": "5017",
   "addresses": {
-    "addresses": "/addresses",
-    "articles": "/articles",
-    "cartItems": "/cartItems",
-    "orderItems": "/orderItems",
-    "orders": "/orders",
-    "reviews": "/reviews",
-    "users": "/users",
-    "login": "/login",
-    "register": "/register"
+    "addresses": "addresses",
+    "articles": "articles",
+    "cartItems": "cartItems",
+    "orderItems": "orderItems",
+    "orders": "orders",
+    "reviews": "reviews",
+    "users": "users",
+    "login": "login",
+    "register": "register"
   }
 }
