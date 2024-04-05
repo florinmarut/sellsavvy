@@ -1,6 +1,6 @@
 {
-  "host": "http://localhost",
-  "port": "5017",
+  "host": "https://localhost",
+  "port": "7218",
   "addresses": {
     "addresses": "addresses",
     "articles": "articles",
