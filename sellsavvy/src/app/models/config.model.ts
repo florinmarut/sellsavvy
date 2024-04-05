@@ -2,6 +2,7 @@ export default interface Config {
   host: string;
   port: string;
   addresses: Address;
+  origin: string;
 }
 
 export interface Address {

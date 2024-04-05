@@ -41,7 +41,6 @@ export class LoginForm implements OnInit {
     this._articlesService.getArticles().subscribe({
       next: (value) => {
         console.warn('Getting articles: ', value);
-        debugger;
       },
       error: (err) => console.error(err),
     });
@@ -53,7 +52,6 @@ export class LoginForm implements OnInit {
       .subscribe({
         next: (value) => {
           console.warn('Login next value is: ' + value);
-          //debugger
         },
         error: (err) => {
           console.error(err);
