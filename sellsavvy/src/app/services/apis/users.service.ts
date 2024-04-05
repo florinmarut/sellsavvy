@@ -43,4 +43,8 @@ export class UsersService {
   deleteUser(id: string, params?: QueryParams): Observable<any> {
     return this._crud.delete(id, this.ROUTE, params);
   }
+
+  getProfile(): Observable<UserDTO> {
+    return this._crud.get(null, `${this.ROUTE}/profile`);
+  }
 }

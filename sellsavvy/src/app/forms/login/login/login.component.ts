@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { ArticlesService } from '../../../services/apis/articles.service';
+import { UsersService } from '../../../services/apis/users.service';
 
 @Component({
   selector: 'login-form',
@@ -28,7 +29,8 @@ export class LoginForm implements OnInit {
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService,
-    private readonly _articlesService: ArticlesService
+    private readonly _articlesService: ArticlesService,
+    private readonly _usersService: UsersService
   ) {}
   ngOnInit(): void {
     this.loginGroup = this._formBuilder.group({
@@ -43,6 +45,17 @@ export class LoginForm implements OnInit {
         console.warn('Getting articles: ', value);
       },
       error: (err) => console.error(err),
+    });
+  }
+
+  getProfile() {
+    this._usersService.getProfile().subscribe({
+      next: (user) => {
+        console.warn(`The current user is: ${user}`);
+      },
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
 
