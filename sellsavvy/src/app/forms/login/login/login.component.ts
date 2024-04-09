@@ -61,7 +61,7 @@ export class LoginForm implements OnInit {
 
   onSubmit(): void {
     this._authService
-      .login(this.loginGroup.value, { useCookies: true })
+      .login(this.loginGroup.value, { useCookies: false })
       .subscribe({
         next: (value) => {
           console.warn('Login next value is: ' + value);

@@ -8,11 +8,15 @@ import {
   ConfigService,
   configInitializerFactory,
 } from './services/config.service';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import { authenticationInterceptor } from './interceptors/authentication.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withFetch()),
     ConfigService,
     {
       provide: APP_INITIALIZER,
@@ -20,8 +24,13 @@ export const appConfig: ApplicationConfig = {
       deps: [ConfigService],
       multi: true,
     },
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([authenticationInterceptor])
+    ),
     provideRouter(routes),
     provideClientHydration(),
-    provideAnimationsAsync(), provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
   ],
 };

@@ -5,16 +5,18 @@ export type Password = string & {
 };
 
 export enum Country {
-  Romania
+  Romania,
 }
 
 export enum State {
-  Timis
+  Timis,
 }
 
 export enum OrderStatus {
   Placed,
   InProgress,
   Delivered,
-  Returned
+  Returned,
 }
+
+export const ACCESS_TOKEN = 'access_token';

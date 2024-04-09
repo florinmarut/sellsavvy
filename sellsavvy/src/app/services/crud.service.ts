@@ -26,10 +26,7 @@ export class CrudService {
     return this._http.get(
       `${this._configurations.host}:${this._configurations.port}/${route}${
         id ? '/' + id : ''
-      }${query}`,
-      {
-        withCredentials: true,
-      }
+      }${query}`
     ) as Observable<Type>;
   }
 
@@ -57,10 +54,7 @@ export class CrudService {
       `${this._configurations.host}:${this._configurations.port}/${route}${
         id ? '/' + id : ''
       }${query}`,
-      data,
-      {
-        withCredentials: true,
-      }
+      data
     ) as Observable<Type>;
   }
 
