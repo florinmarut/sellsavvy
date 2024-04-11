@@ -8,9 +8,10 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AuthenticationService } from '../../../services/authentication.service';
-import { ArticlesService } from '../../../services/apis/articles.service';
-import { UsersService } from '../../../services/apis/users.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import { ArticlesService } from '../../services/apis/articles.service';
+import { UsersService } from '../../services/apis/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-form',
@@ -29,8 +30,7 @@ export class LoginForm implements OnInit {
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService,
-    private readonly _articlesService: ArticlesService,
-    private readonly _usersService: UsersService
+    private readonly _router: Router
   ) {}
   ngOnInit(): void {
     this.loginGroup = this._formBuilder.group({
@@ -39,21 +39,12 @@ export class LoginForm implements OnInit {
     });
   }
 
-  getArticles() {
-    this._articlesService.getArticles().subscribe({
-      next: (value) => {
-        console.warn('Getting articles: ', value);
-      },
-      error: (err) => console.error(err),
-    });
-  }
-
   onSubmit(): void {
     this._authService
       .login(this.loginGroup.value, { useCookies: false })
       .subscribe({
         next: (value) => {
-          console.warn('Login next value is: ' + value);
+          this._router.navigate(['']);
         },
         error: (err) => {
           console.error(err);
