@@ -48,17 +48,6 @@ export class LoginForm implements OnInit {
     });
   }
 
-  getProfile() {
-    this._usersService.getProfile().subscribe({
-      next: (user) => {
-        console.warn(`The current user is: ${user}`);
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
-  }
-
   onSubmit(): void {
     this._authService
       .login(this.loginGroup.value, { useCookies: false })
