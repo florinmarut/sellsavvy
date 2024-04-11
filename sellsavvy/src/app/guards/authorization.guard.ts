@@ -6,6 +6,6 @@ export const authorizationGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthenticationService);
   const router = inject(Router);
 
-  if (!authService.isTokenAvailable()) router.navigate(['**']);
+  if (!authService.isTokenAvailable()) router.navigate(['login']);
   return authService.isTokenAvailable();
 };

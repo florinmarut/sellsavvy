@@ -59,7 +59,7 @@ export class AuthenticationService {
   }
 
   private getProfile(): Observable<UserDTO> {
-    return this._crud.get(null, `${this.PROFILE_ROUTE}/profile`);
+    return this._crud.get(null, this.PROFILE_ROUTE);
   }
 
   isTokenAvailable(): boolean {
