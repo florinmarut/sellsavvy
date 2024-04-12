@@ -10,7 +10,6 @@ export interface UserCreateDTO {
   email: EmailAddress;
   password: Password;
   description: string;
-  userName: string;
   firstName: string;
   lastName: string;
 }
@@ -21,7 +20,6 @@ export interface UserUpdateDTO {
   email: EmailAddress;
   password: Password;
   description: string;
-  userName: string;
   firstName: string;
   lastName: string;
 }

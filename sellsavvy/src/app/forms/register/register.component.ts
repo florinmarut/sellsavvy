@@ -15,6 +15,9 @@ import { UsersService } from '../../services/apis/users.service';
 import { validatePassword } from '../../models/validators';
 import { SuccessCardComponent } from '../../components/success-card/success-card.component';
 import { FailCardComponent } from '../../components/fail-card/fail-card.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Guid } from 'guid-typescript';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'register-form',
@@ -26,6 +29,7 @@ import { FailCardComponent } from '../../components/fail-card/fail-card.componen
     MatButtonModule,
     SuccessCardComponent,
     FailCardComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -34,6 +38,7 @@ export class RegisterForm implements OnInit {
   registerForm!: FormGroup;
   isFormSubmitted = false;
   isFormSubmittedWithErrors = false;
+  isLoading = false;
 
   get email() {
     return this.registerForm.get('email');
@@ -57,14 +62,13 @@ export class RegisterForm implements OnInit {
 
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private readonly _userService: UsersService
+    private readonly _authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
-      userName: ['', [Validators.required, Validators.maxLength(50)]],
       phoneNumber: ['', [Validators.required, this.phoneNumberValidator()]],
       description: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -132,14 +136,19 @@ export class RegisterForm implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     const user = this.registerForm.value;
-    this._userService.createUser(user).subscribe({
+    user.id = Guid.create().toString();
+    debugger
+    this._authService.register(user).subscribe({
       next: (value) => {
+        this.isLoading = false;
         this.isFormSubmittedWithErrors = false;
         this.isFormSubmitted = true;
       },
       error: (err) => {
         console.error(err);
+        this.isLoading = false;
         this.isFormSubmittedWithErrors = true;
         this.isFormSubmitted = true;
       },

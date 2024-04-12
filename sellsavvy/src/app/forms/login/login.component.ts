@@ -12,10 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../../services/authentication.service';
-import { ArticlesService } from '../../services/apis/articles.service';
-import { UsersService } from '../../services/apis/users.service';
 import { Router } from '@angular/router';
 import { validatePassword } from '../../models/validators';
+import { SuccessCardComponent } from '../../components/success-card/success-card.component';
+import { FailCardComponent } from '../../components/fail-card/fail-card.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'login-form',
@@ -25,13 +26,18 @@ import { validatePassword } from '../../models/validators';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    SuccessCardComponent,
+    FailCardComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginForm implements OnInit {
   loginGroup!: FormGroup;
-  displayError = false;
+  isFormSubmitted = false;
+  isFormSubmittedWithErrors = false;
+  isLoading = false;
 
   get email() {
     return this.loginGroup.get('email');
@@ -67,15 +73,21 @@ export class LoginForm implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     this._authService
       .login(this.loginGroup.value, { useCookies: false })
       .subscribe({
         next: (value) => {
+          this.isLoading = false;
+          this.isFormSubmittedWithErrors = false;
+          this.isFormSubmitted = true;
           this._router.navigate(['']);
         },
         error: (err) => {
-          this.displayError = true;
           console.error(err);
+          this.isLoading = false;
+          this.isFormSubmittedWithErrors = true;
+          this.isFormSubmitted = true;
         },
       });
   }

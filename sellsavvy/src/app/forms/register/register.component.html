@@ -6,9 +6,15 @@
 } @else {
 <fail-card
   [title]="'Fail!'"
-  [message]="'An error occurred trying to register your account to SellSavvy! Please try again later!'"
+  [message]="
+    'An error occurred trying to register your account to SellSavvy! Please try again later!'
+  "
 ></fail-card>
-} } @else {
+} } @else if(isLoading) {
+<div class="spinner-container">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+} @else {
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
   <mat-form-field>
     <mat-label>First name</mat-label>
@@ -17,10 +23,6 @@
   <mat-form-field>
     <mat-label>Last name</mat-label>
     <input matInput type="text" formControlName="lastName" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>User name</mat-label>
-    <input matInput type="text" formControlName="userName" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Phone number</mat-label>
@@ -74,6 +76,7 @@
     color="primary"
     type="submit"
     [disabled]="!registerForm.valid"
+    [class.button--disabled]="registerForm.invalid"
   >
     Submit
   </button>

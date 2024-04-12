@@ -2,7 +2,14 @@ import { Inject, Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import Config, { QueryParams } from '../models/config.model';
 import { LoginBody } from '../models/authentication.model';
-import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  map,
+  switchMap,
+  throwError,
+} from 'rxjs';
 import { CrudService } from './crud.service';
 import { ACCESS_TOKEN } from '../models/constants.const';
 import { StorageService } from './storage.service';
@@ -43,18 +50,32 @@ export class AuthenticationService {
       .post(null, body, this._config.addresses['login'], params)
       .pipe(
         map((response: any) => {
+          debugger;
           this._storage.addToLocalStorage(ACCESS_TOKEN, response.accessToken);
           this._loggedIn$.next(true);
           return response;
         }),
         switchMap(() => {
+          debugger;
           return this.getProfile().pipe(
             map((response) => {
+              debugger;
               this._user$.next(response);
               return response;
             })
           );
         })
+      );
+  }
+
+  register(user: any): Observable<any> {
+    return this._crud
+      .post(null, user, this._config.addresses['register'], {
+        useCookies: false,
+      })
+      .pipe(
+        map((value) => value),
+        catchError((error) => throwError(() => error))
       );
   }
 

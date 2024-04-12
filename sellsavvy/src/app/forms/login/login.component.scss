@@ -18,9 +18,24 @@
     margin-top: 20px;
   }
 
+  .button--disabled {
+    background-color: gray;
+    opacity: 0.6; // Slightly faded when disabled
+    cursor: default; // Indicate non-clickable state
+  }
+
   &mat-error {
     mat-error {
       display: block;
     }
   }
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column; // Arrange content vertically
+  align-items: center; // Horizontal centering
+  justify-content: center; // Vertical centering
+  height: 100vh; // Ensure the container takes full viewport height
+  min-height: 300px; // A minimum height in case content is smaller
 }

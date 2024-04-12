@@ -1,3 +1,15 @@
+@if(isFormSubmittedWithErrors) {
+<fail-card
+  [title]="'Fail!'"
+  [message]="
+    'An error occurred trying to login your account to SellSavvy! Please try again later!'
+  "
+></fail-card
+>} @else if(isLoading) {
+<div class="spinner-container">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+} @else {
 <div class="form-container">
   <form [formGroup]="loginGroup" (ngSubmit)="onSubmit()">
     <mat-form-field>
@@ -16,10 +28,15 @@
       }
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!loginGroup.valid"
+      [class.button--disabled]="loginGroup.invalid"
+    >
+      Submit
+    </button>
   </form>
-
-  @if (displayError) {
-  <mat-error>Error logging in. Check credentials and try again.</mat-error>
-  }
 </div>
+}

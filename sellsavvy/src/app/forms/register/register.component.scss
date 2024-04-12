@@ -25,4 +25,19 @@
     border-radius: 4px;
     cursor: pointer;
   }
+
+  .button--disabled {
+    background-color: gray; 
+    opacity: 0.6;     // Slightly faded when disabled
+    cursor: default;  // Indicate non-clickable state
+  }
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column; // Arrange content vertically
+  align-items: center; // Horizontal centering
+  justify-content: center; // Vertical centering
+  height: 100vh; // Ensure the container takes full viewport height
+  min-height: 300px; // A minimum height in case content is smaller
 }
