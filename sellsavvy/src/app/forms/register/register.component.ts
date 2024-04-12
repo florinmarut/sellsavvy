@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UsersService } from '../../services/apis/users.service';
 import { validatePassword } from '../../models/validators';
+import { SuccessCardComponent } from '../../components/success-card/success-card.component';
+import { FailCardComponent } from '../../components/fail-card/fail-card.component';
 
 @Component({
   selector: 'register-form',
@@ -22,12 +24,16 @@ import { validatePassword } from '../../models/validators';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    SuccessCardComponent,
+    FailCardComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
 export class RegisterForm implements OnInit {
   registerForm!: FormGroup;
+  isFormSubmitted = false;
+  isFormSubmittedWithErrors = false;
 
   get email() {
     return this.registerForm.get('email');
@@ -127,6 +133,16 @@ export class RegisterForm implements OnInit {
 
   onSubmit(): void {
     const user = this.registerForm.value;
-    this._userService.createUser(user);
+    this._userService.createUser(user).subscribe({
+      next: (value) => {
+        this.isFormSubmittedWithErrors = false;
+        this.isFormSubmitted = true;
+      },
+      error: (err) => {
+        console.error(err);
+        this.isFormSubmittedWithErrors = true;
+        this.isFormSubmitted = true;
+      },
+    });
   }
 }

@@ -1,0 +1,32 @@
+.success-card {
+  background-color: #e8f5e9; // Soft green background
+  color: #2e7d32; // Dark green text
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  // Rectangular shape
+  width: 350px; // Adjust the width as needed
+  margin: 25px auto; // Automatic left & right margins for horizontal centering
+
+  // Centering within the page
+  display: flex;
+  flex-direction: column; // Arrange content vertically
+  align-items: center; // Horizontal centering
+  justify-content: center; // Vertical centering
+  position: absolute; // Required for absolute positioning
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); // Technique to perfectly center
+
+  .success-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+  }
+
+  .success-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+}

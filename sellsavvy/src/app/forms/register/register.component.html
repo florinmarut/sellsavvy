@@ -1,3 +1,14 @@
+@if(isFormSubmitted) { @if(!isFormSubmittedWithErrors) {
+<success-card
+  [title]="'Registered!'"
+  [message]="'You have been successfully registered to SellSavvy!'"
+></success-card>
+} @else {
+<fail-card
+  [title]="'Fail!'"
+  [message]="'An error occurred trying to register your account to SellSavvy! Please try again later!'"
+></fail-card>
+} } @else {
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
   <mat-form-field>
     <mat-label>First name</mat-label>
@@ -67,3 +78,4 @@
     Submit
   </button>
 </form>
+}
