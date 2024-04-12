@@ -3,11 +3,17 @@
     <mat-form-field>
       <mat-label>E-mail address</mat-label>
       <input matInput type="email" formControlName="email" />
+      @if(email?.hasError('email')) {
+      <mat-error>Not a valid e-mail</mat-error>
+      }
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" />
+      @if(password?.hasError('passwordStrength')) {
+      <mat-error>Password is too weak</mat-error>
+      }
     </mat-form-field>
 
     <button mat-raised-button color="primary" type="submit">Submit</button>

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +15,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ArticlesService } from '../../services/apis/articles.service';
 import { UsersService } from '../../services/apis/users.service';
 import { Router } from '@angular/router';
+import { validatePassword } from '../../models/validators';
 
 @Component({
   selector: 'login-form',
@@ -28,6 +32,15 @@ import { Router } from '@angular/router';
 export class LoginForm implements OnInit {
   loginGroup!: FormGroup;
   displayError = false;
+
+  get email() {
+    return this.loginGroup.get('email');
+  }
+
+  get password() {
+    return this.loginGroup.get('password');
+  }
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService,
@@ -35,9 +48,22 @@ export class LoginForm implements OnInit {
   ) {}
   ngOnInit(): void {
     this.loginGroup = this._formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, this.passwordValidator()]],
     });
+  }
+
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null;
+      }
+
+      const isValid = validatePassword(value);
+      return isValid ? null : { passwordStrength: true };
+    };
   }
 
   onSubmit(): void {

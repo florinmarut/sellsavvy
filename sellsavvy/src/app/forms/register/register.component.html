@@ -14,6 +14,9 @@
   <mat-form-field>
     <mat-label>Phone number</mat-label>
     <input matInput type="text" formControlName="phoneNumber" />
+    @if(phoneNumber?.hasError('invalidPhoneNumber')) {
+    <mat-error>Invalid phone number</mat-error>
+    }
   </mat-form-field>
   <mat-form-field>
     <mat-label>Description</mat-label>
@@ -22,18 +25,37 @@
   <mat-form-field>
     <mat-label>E-mail address</mat-label>
     <input matInput type="email" formControlName="email" />
+    @if(email?.hasError('email')) {
+    <mat-error>Not a valid e-mail address</mat-error>
+    }
   </mat-form-field>
   <mat-form-field>
     <mat-label>Confirm e-mail address</mat-label>
     <input matInput type="email" formControlName="confirmEmail" />
+    {{
+      registerForm && registerForm.errors && registerForm.errors["emailMatch"]
+    }}
+    @if (confirmEmail?.hasError('emailNotMatching')) {
+    <mat-error>E-mail does not match</mat-error>
+    } @if(email?.hasError('email')) {
+    <mat-error>Not a valid e-mail address</mat-error>
+    }
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
     <input matInput type="password" formControlName="password" />
+    @if (password?.hasError('passwordStrength')) {
+    <mat-error>Password is too weak. </mat-error>
+    }
   </mat-form-field>
   <mat-form-field>
     <mat-label>Confirm password</mat-label>
     <input matInput type="password" formControlName="confirmPassword" />
+    @if (confirmPassword?.hasError('passwordNotMatching')) {
+    <mat-error>Password does not match</mat-error>
+    } @if (confirmPassword?.hasError('passwordStrength')) {
+    <mat-error>Password is too weak. </mat-error>
+    }
   </mat-form-field>
 
   <button
