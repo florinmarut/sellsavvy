@@ -18,13 +18,8 @@
     margin-top: 20px;
   }
 
-  .error {
-    color: red;
-    font-weight: bold;
-  }
-
-  &.error {
-    .error {
+  &mat-error {
+    mat-error {
       display: block;
     }
   }
