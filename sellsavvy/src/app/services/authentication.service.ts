@@ -57,7 +57,6 @@ export class AuthenticationService {
         switchMap(() => {
           return this.getProfile().pipe(
             map((response) => {
-              this._user$.next(response);
               return response;
             })
           );
@@ -66,16 +65,19 @@ export class AuthenticationService {
   }
 
   register(user: any): Observable<any> {
-    return this._crud
-      .post(null, user, this._config.addresses['register'])
-      .pipe(
-        map((value) => value),
-        catchError((error) => throwError(() => error))
-      );
+    return this._crud.post(null, user, this._config.addresses['register']).pipe(
+      map((value) => value),
+      catchError((error) => throwError(() => error))
+    );
   }
 
-  private getProfile(): Observable<UserDTO> {
-    return this._crud.get(null, this.PROFILE_ROUTE);
+  getProfile(): Observable<UserDTO> {
+    return this._crud.get(null, this.PROFILE_ROUTE).pipe(
+      map((value) => {
+        this._user$.next(value as UserDTO | null);
+        return value as UserDTO;
+      })
+    );
   }
 
   isTokenAvailable(): boolean {
