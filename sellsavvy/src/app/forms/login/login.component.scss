@@ -1,0 +1,29 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+button[mat-raised-button] {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-error {
+  color: red;
+  font-weight: bold;
+}
+
+.form-container.form-error .form-error {
+  display: block;
+}

@@ -1,13 +1,19 @@
-<form [formGroup]="loginGroup" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <mat-label>E-mail address</mat-label>
-    <input matInput type="email" formControlName="email" />
-  </mat-form-field>
+<div class="form-container">
+  <form [formGroup]="loginGroup" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>E-mail address</mat-label>
+      <input matInput type="email" formControlName="email" />
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" />
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+    </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">Submit</button>
-</form>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+
+  @if (displayError) {
+  <p class="form-error">Error logging in. Check credentials and try again.</p>
+  }
+</div>

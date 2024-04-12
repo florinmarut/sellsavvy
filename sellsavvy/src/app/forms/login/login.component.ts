@@ -27,6 +27,7 @@ import { Router } from '@angular/router';
 })
 export class LoginForm implements OnInit {
   loginGroup!: FormGroup;
+  displayError = false;
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService,
@@ -47,6 +48,7 @@ export class LoginForm implements OnInit {
           this._router.navigate(['']);
         },
         error: (err) => {
+          this.displayError = true;
           console.error(err);
         },
       });
