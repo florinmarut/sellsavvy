@@ -50,16 +50,13 @@ export class AuthenticationService {
       .post(null, body, this._config.addresses['login'], params)
       .pipe(
         map((response: any) => {
-          debugger;
           this._storage.addToLocalStorage(ACCESS_TOKEN, response.accessToken);
           this._loggedIn$.next(true);
           return response;
         }),
         switchMap(() => {
-          debugger;
           return this.getProfile().pipe(
             map((response) => {
-              debugger;
               this._user$.next(response);
               return response;
             })
@@ -70,9 +67,7 @@ export class AuthenticationService {
 
   register(user: any): Observable<any> {
     return this._crud
-      .post(null, user, this._config.addresses['register'], {
-        useCookies: false,
-      })
+      .post(null, user, this._config.addresses['register'])
       .pipe(
         map((value) => value),
         catchError((error) => throwError(() => error))

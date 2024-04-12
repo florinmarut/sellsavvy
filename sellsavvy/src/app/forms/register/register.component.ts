@@ -138,8 +138,6 @@ export class RegisterForm implements OnInit {
   onSubmit(): void {
     this.isLoading = true;
     const user = this.registerForm.value;
-    user.id = Guid.create().toString();
-    debugger
     this._authService.register(user).subscribe({
       next: (value) => {
         this.isLoading = false;
