@@ -33,6 +33,7 @@ export const routes: Routes = [
   {
     path: 'article-form',
     component: ArticleFormPageComponent,
+    canActivate: [authorizationGuard],
   },
   {
     path: '**',
