@@ -8,9 +8,10 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { UsersService } from '../../services/apis/users.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'register-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -24,7 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class RegisterForm implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private readonly _formBuilder: FormBuilder) {}
+  constructor(private readonly _formBuilder: FormBuilder, private readonly _userService: UsersService) {}
 
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
@@ -40,5 +41,8 @@ export class RegisterForm implements OnInit {
     });
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    const user = this.registerForm.value;
+    this._userService.createUser(user);
+  }
 }
