@@ -13,7 +13,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe((value) => {
-      console.log('User is: ' + value);
+      console.log('User is: ' + value.email);
     });
   }
 }

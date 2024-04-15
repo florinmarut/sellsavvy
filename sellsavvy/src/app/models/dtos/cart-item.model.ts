@@ -5,6 +5,7 @@ export interface CartItemCreateDTO {
   id: string;
   amount: number;
   article: ArticleDTO;
+  userId: string;
   user: UserDTO;
 }
 
@@ -12,6 +13,7 @@ export interface CartItemUpdateDTO {
   id: string;
   amount: number;
   article: ArticleDTO;
+  userId: string;
   user: UserDTO;
 }
 
@@ -19,5 +21,6 @@ export interface CartItemDTO {
   id: string;
   amount: number;
   article: ArticleDTO;
+  userId: string;
   user: UserDTO;
 }

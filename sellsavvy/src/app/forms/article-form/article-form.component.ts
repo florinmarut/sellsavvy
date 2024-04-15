@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ArticlesService } from '../../services/apis/articles.service';
 import {
   FormBuilder,
@@ -12,6 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { SuccessCardComponent } from '../../components/success-card/success-card.component';
 import { FailCardComponent } from '../../components/fail-card/fail-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthenticationService } from '../../services/authentication.service';
+import { UserDTO } from '../../models/dtos/user.model';
+import { Subscription, catchError, map, switchMap, throwError } from 'rxjs';
 
 @Component({
   selector: 'article-form',
@@ -24,15 +27,25 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     SuccessCardComponent,
     FailCardComponent,
     MatProgressSpinnerModule,
+    SuccessCardComponent,
+    FailCardComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './article-form.component.html',
   styleUrl: './article-form.component.scss',
 })
-export class ArticleFormComponent implements OnInit {
+export class ArticleFormComponent implements OnInit, OnDestroy {
   articleForm!: FormGroup;
+  isFormSubmitted = false;
+  isFormSubmittedWithErrors = false;
+  isLoading = false;
+
+  postArticleSubscription!: Subscription;
+
   constructor(
     private readonly _articlesService: ArticlesService,
-    private readonly _formBuilder: FormBuilder
+    private readonly _formBuilder: FormBuilder,
+    private readonly _authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -45,15 +58,56 @@ export class ArticleFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     const article = this.articleForm.value;
 
-    // get the Id of the current user, refactor code below to include two observables with switchMap
+    this.postArticleSubscription = this._authService
+      .getProfile()
+      .pipe(
+        map((user) => {
+          article.sellerId = user?.id;
+          return article;
+        }),
+        catchError((error) => {
+          this.isLoading = false;
+          this.isFormSubmittedWithErrors = true;
+          this.isFormSubmitted = false;
+          return throwError(() => new Error(error));
+        }),
+        switchMap((value) => {
+          return this._articlesService.createArticle(value).pipe(
+            map((articleValue) => {
+              this.isLoading = false;
+              this.isFormSubmittedWithErrors = false;
+              this.isFormSubmitted = true;
+            }),
+            catchError((error) => {
+              this.isLoading = false;
+              this.isFormSubmittedWithErrors = true;
+              this.isFormSubmitted = false;
+              return throwError(() => new Error(error));
+            })
+          );
+        })
+      )
+      .subscribe();
 
-    this._articlesService.createArticle(article).subscribe({
-      next: (value) => {},
-      error: (err) => {
-        console.warn(err);
-      },
-    });
+    // this._articlesService.createArticle(article).subscribe({
+    //   next: (value) => {
+    //     this.isLoading = false;
+    //     this.isFormSubmittedWithErrors = false;
+    //     this.isFormSubmitted = true;
+    //   },
+    //   error: (err) => {
+    //     console.error(err);
+    //     this.isLoading = false;
+    //     this.isFormSubmittedWithErrors = true;
+    //     this.isFormSubmitted = true;
+    //   },
+    // });
+  }
+
+  ngOnDestroy(): void {
+    this.postArticleSubscription?.unsubscribe();
   }
 }

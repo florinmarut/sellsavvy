@@ -31,3 +31,12 @@
     }
   }
 }
+
+.spinner-container {
+  display: flex;
+  flex-direction: column; // Arrange content vertically
+  align-items: center; // Horizontal centering
+  justify-content: center; // Vertical centering
+  height: 100vh; // Ensure the container takes full viewport height
+  min-height: 300px; // A minimum height in case content is smaller
+}

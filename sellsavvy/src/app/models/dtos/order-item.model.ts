@@ -5,7 +5,9 @@ export interface OrderItemCreateDTO {
   id: string;
   amount: number;
   price: string;
+  orderId: string;
   order: OrderDTO;
+  articleId: string;
   article: ArticleDTO;
 }
 
@@ -13,7 +15,9 @@ export interface OrderItemUpdateDTO {
   id: string;
   amount: number;
   price: string;
+  orderId: string;
   order: OrderDTO;
+  articleId: string;
   article: ArticleDTO;
 }
 
@@ -21,6 +25,8 @@ export interface OrderItemDTO {
   id: string;
   amount: number;
   price: string;
+  orderId: string;
   order: OrderDTO;
+  articleId: string;
   article: ArticleDTO;
 }

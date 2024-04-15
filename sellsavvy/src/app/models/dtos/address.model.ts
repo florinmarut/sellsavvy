@@ -8,6 +8,7 @@ export interface AddressCreateDTO {
   country: Country;
   street: string;
   zip: string;
+  userId: string;
   user: UserDTO;
 }
 
@@ -18,6 +19,7 @@ export interface AddressUpdateDTO {
   country: Country;
   street: string;
   zip: string;
+  userId: string;
   user: UserDTO;
 }
 
@@ -28,5 +30,6 @@ export interface AddressDTO {
   country: Country;
   street: string;
   zip: string;
+  userId: string;
   user: UserDTO;
 }

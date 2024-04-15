@@ -8,6 +8,7 @@ export interface ArticleCreateDTO {
   stock: number;
   rating: number;
   price: number;
+  sellerId: string;
   seller: UserDTO;
   reviews: Array<ReviewDTO>;
 }
@@ -19,6 +20,7 @@ export interface ArticleUpdateDTO {
   stock: number;
   rating: number;
   price: number;
+  sellerId: string;
   seller: UserDTO;
   reviews: Array<ReviewDTO>;
 }
@@ -30,6 +32,7 @@ export interface ArticleDTO {
   stock: number;
   rating: number;
   price: number;
+  sellerId: string;
   seller: UserDTO;
   reviews: Array<ReviewDTO>;
 }
