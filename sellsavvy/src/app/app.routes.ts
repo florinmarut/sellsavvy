@@ -32,7 +32,7 @@ export const routes: Routes = [
     component: ArticlesPageComponent,
   },
   {
-    path: 'view-article',
+    path: 'view-article/:id',
     component: ArticlePageComponent,
   },
   {

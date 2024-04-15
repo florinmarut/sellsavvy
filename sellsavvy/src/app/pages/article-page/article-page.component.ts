@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'article-page',
@@ -99,4 +100,8 @@ export class ArticlePageComponent {
       },
     ],
   };
+
+  constructor(private readonly _route: ActivatedRoute) {
+    this._route.paramMap.subscribe((params) => console.log(params.get('id')));
+  }
 }
