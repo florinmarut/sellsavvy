@@ -6,6 +6,7 @@ import { ArticlesPageComponent } from './pages/articles-page/articles-page.compo
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { authorizationGuard } from './guards/authorization.guard';
 import { ArticleFormPageComponent } from './pages/article-form-page/article-form-page.component';
+import { ArticlePageComponent } from './pages/article-page/article-page.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'articles',
     component: ArticlesPageComponent,
+  },
+  {
+    path: 'view-article',
+    component: ArticlePageComponent,
   },
   {
     path: 'create-article',
