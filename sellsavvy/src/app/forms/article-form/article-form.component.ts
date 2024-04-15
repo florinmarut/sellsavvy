@@ -15,6 +15,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserDTO } from '../../models/dtos/user.model';
 import { Subscription, catchError, map, switchMap, throwError } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticleDTO } from '../../models/dtos/article.model';
 
 @Component({
   selector: 'article-form',
@@ -39,27 +41,62 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   isFormSubmitted = false;
   isFormSubmittedWithErrors = false;
   isLoading = false;
+  isFormInEditMode = false;
+
+  private _articleId!: string;
 
   postArticleSubscription!: Subscription;
 
   constructor(
     private readonly _articlesService: ArticlesService,
     private readonly _formBuilder: FormBuilder,
-    private readonly _authService: AuthenticationService
+    private readonly _authService: AuthenticationService,
+    private readonly _route: ActivatedRoute,
+    private readonly _router: Router
   ) {}
 
   ngOnInit(): void {
-    this.articleForm = this._formBuilder.group({
-      title: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      price: [0, [Validators.required]],
-      stock: [1, [Validators.required]],
+    this.initArticleForm();
+
+    this._route.paramMap.subscribe((params) => {
+      this.initArticleForm(params.get('id') as string);
     });
+  }
+
+  initArticleForm(id?: string) {
+    if (id) {
+      this.isFormInEditMode = true;
+      this._articlesService.getArticle(id).subscribe({
+        next: (article: ArticleDTO) => {
+          this._articleId = article.id;
+          this.articleForm = this._formBuilder.group({
+            title: [article.title, [Validators.required]],
+            description: [article.description, [Validators.required]],
+            price: [article.price, [Validators.required]],
+            stock: [article.stock, [Validators.required]],
+          });
+        },
+        error: (err) => {
+          console.error(err);
+          this._router.navigate(['/fail']);
+        },
+      });
+    } else {
+      this.isFormInEditMode = false;
+      this.articleForm = this._formBuilder.group({
+        title: ['', [Validators.required]],
+        description: ['', [Validators.required]],
+        price: [0, [Validators.required]],
+        stock: [1, [Validators.required]],
+      });
+    }
   }
 
   onSubmit() {
     this.isLoading = true;
     const article = this.articleForm.value;
+
+    if (this._articleId) article.id = this._articleId;
 
     this.postArticleSubscription = this._authService
       .getProfile()
@@ -75,19 +112,37 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
           return throwError(() => new Error(error));
         }),
         switchMap((value) => {
-          return this._articlesService.createArticle(value).pipe(
-            map((articleValue) => {
-              this.isLoading = false;
-              this.isFormSubmittedWithErrors = false;
-              this.isFormSubmitted = true;
-            }),
-            catchError((error) => {
-              this.isLoading = false;
-              this.isFormSubmittedWithErrors = true;
-              this.isFormSubmitted = false;
-              return throwError(() => new Error(error));
-            })
-          );
+          if (!this.isFormInEditMode) {
+            return this._articlesService.createArticle(value).pipe(
+              map((articleValue) => {
+                this.isLoading = false;
+                this.isFormSubmittedWithErrors = false;
+                this.isFormSubmitted = true;
+              }),
+              catchError((error) => {
+                this.isLoading = false;
+                this.isFormSubmittedWithErrors = true;
+                this.isFormSubmitted = false;
+                return throwError(() => new Error(error));
+              })
+            );
+          } else {
+            return this._articlesService
+              .updateArticle(value)
+              .pipe(
+                map((articleValue) => {
+                  this.isLoading = false;
+                  this.isFormSubmittedWithErrors = false;
+                  this.isFormSubmitted = true;
+                }),
+                catchError((error) => {
+                  this.isLoading = false;
+                  this.isFormSubmittedWithErrors = true;
+                  this.isFormSubmitted = false;
+                  return throwError(() => new Error(error));
+                })
+              );
+          }
         })
       )
       .subscribe();

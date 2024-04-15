@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { PageMessageService } from '../../services/data-share/page-message.service';
 
 @Component({
   selector: 'success-card',
@@ -9,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './success-card.component.scss',
 })
 export class SuccessCardComponent {
-  @Input() title: string = 'Success';
-  @Input() message: string = 'Operation was executed successfully';
+  @Input() title: string = this._message.successTitle;
+  @Input() message: string = this._message.successMessage;
+
+  constructor(private readonly _message: PageMessageService) {}
 }

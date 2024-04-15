@@ -7,6 +7,8 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { authorizationGuard } from './guards/authorization.guard';
 import { ArticleFormPageComponent } from './pages/article-form-page/article-form-page.component';
 import { ArticlePageComponent } from './pages/article-page/article-page.component';
+import { SuccessPageComponent } from './pages/success-page/success-page.component';
+import { FailPageComponent } from './pages/fail-page/fail-page.component';
 
 export const routes: Routes = [
   {
@@ -36,9 +38,17 @@ export const routes: Routes = [
     component: ArticlePageComponent,
   },
   {
-    path: 'create-article',
+    path: 'article-form/:id',
     component: ArticleFormPageComponent,
     canActivate: [authorizationGuard],
+  },
+  {
+    path: 'success',
+    component: SuccessPageComponent,
+  },
+  {
+    path: 'fail',
+    component: FailPageComponent,
   },
   {
     path: '**',

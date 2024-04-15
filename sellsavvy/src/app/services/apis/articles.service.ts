@@ -33,8 +33,8 @@ export class ArticlesService {
   }
 
   updateArticle(
-    id: string,
     body: ArticleUpdateDTO,
+    id?: string,
     params?: QueryParams
   ): Observable<any> {
     return this._crud.put(id, body, this.ROUTE, params);

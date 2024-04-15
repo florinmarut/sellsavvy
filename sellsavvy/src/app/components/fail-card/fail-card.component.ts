@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { PageMessageService } from '../../services/data-share/page-message.service';
 
 @Component({
   selector: 'fail-card',
@@ -9,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './fail-card.component.scss',
 })
 export class FailCardComponent {
-  @Input() title: string = 'Fail';
-  @Input() message: string = 'Operation failed';
+  @Input() title: string = this._message.failTitle;
+  @Input() message: string = this._message.failMessage;
+
+  constructor(private readonly _message: PageMessageService) {}
 }

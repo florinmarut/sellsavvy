@@ -59,7 +59,7 @@ export class CrudService {
   }
 
   put<Type>(
-    id: string | null,
+    id: string | null = null,
     data: any,
     route: string | Address,
     qp: QueryParams = {}
