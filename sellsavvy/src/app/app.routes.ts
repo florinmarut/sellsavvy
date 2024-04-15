@@ -38,7 +38,12 @@ export const routes: Routes = [
     component: ArticlePageComponent,
   },
   {
-    path: 'article-form/:id',
+    path: 'article-create',
+    component: ArticleFormPageComponent,
+    canActivate: [authorizationGuard],
+  },
+  {
+    path: 'article-update/:id',
     component: ArticleFormPageComponent,
     canActivate: [authorizationGuard],
   },
