@@ -8,6 +8,7 @@ import {
   ReviewDTO,
   ReviewUpdateDTO,
 } from '../../models/dtos/review.model';
+import { PagedData } from '../../models/dtos/paged.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,22 @@ export class ReviewsService {
 
   getReviews(params?: QueryParams): Observable<Array<ReviewDTO>> {
     return this._crud.get(null, this.ROUTE, params);
+  }
+
+  getPagedReviews(
+    pageNumber: number = 1,
+    pageSize: number = 25,
+    filters?: string,
+    sort?: string,
+    order?: string
+  ): Observable<PagedData<ReviewDTO>> {
+    return this._crud.get(null, `${this.ROUTE}/paged`, {
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+      filters: filters,
+      sort: sort,
+      order: order,
+    });
   }
 
   getReview(id: string, params?: QueryParams): Observable<ReviewDTO> {

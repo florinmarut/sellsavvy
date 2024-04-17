@@ -10,5 +10,5 @@ export interface Address {
 }
 
 export interface QueryParams {
-  [key: string]: string | number | boolean;
+  [key: string]: string | number | boolean | undefined;
 }

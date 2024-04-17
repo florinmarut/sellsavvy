@@ -4,17 +4,17 @@
   </div>
 
   <div class="article-details">
-    <h2 class="article-title">{{ article.title }}</h2>
-    <p class="article-description">{{ article.description }}</p>
+    <h2 class="article-title">{{ article?.title }}</h2>
+    <p class="article-description">{{ article?.description }}</p>
 
     <div class="article-info">
       <span class="price">
-        {{ article.price | currency }}
+        {{ article?.price | currency }}
       </span>
-      <span *ngIf="article.rating" class="rating">
-        <mat-icon>star</mat-icon> {{ article.rating }}/5
+      <span *ngIf="article?.rating" class="rating">
+        <mat-icon>star</mat-icon> {{ article?.rating }}/5
       </span>
-      <span class="stock"> In Stock: {{ article.stock }} </span>
+      <span class="stock"> In Stock: {{ article?.stock }} </span>
     </div>
 
     <button mat-raised-button color="primary">Add to Cart</button>
@@ -23,7 +23,7 @@
   <div class="article-reviews">
     <h3 class="reviews-title">Reviews</h3>
 
-    <div class="review" *ngFor="let review of article.reviews">
+    <div class="review" *ngFor="let review of article?.reviews">
       <mat-icon *ngIf="review.rating" class="review-rating">star</mat-icon>
       {{ review.rating }}/5
       <p class="review-comment">{{ review.comment }}</p>

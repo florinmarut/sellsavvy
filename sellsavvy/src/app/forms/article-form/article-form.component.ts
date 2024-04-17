@@ -127,39 +127,23 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
               })
             );
           } else {
-            return this._articlesService
-              .updateArticle(value)
-              .pipe(
-                map((articleValue) => {
-                  this.isLoading = false;
-                  this.isFormSubmittedWithErrors = false;
-                  this.isFormSubmitted = true;
-                }),
-                catchError((error) => {
-                  this.isLoading = false;
-                  this.isFormSubmittedWithErrors = true;
-                  this.isFormSubmitted = false;
-                  return throwError(() => new Error(error));
-                })
-              );
+            return this._articlesService.updateArticle(value).pipe(
+              map((articleValue) => {
+                this.isLoading = false;
+                this.isFormSubmittedWithErrors = false;
+                this.isFormSubmitted = true;
+              }),
+              catchError((error) => {
+                this.isLoading = false;
+                this.isFormSubmittedWithErrors = true;
+                this.isFormSubmitted = false;
+                return throwError(() => new Error(error));
+              })
+            );
           }
         })
       )
       .subscribe();
-
-    // this._articlesService.createArticle(article).subscribe({
-    //   next: (value) => {
-    //     this.isLoading = false;
-    //     this.isFormSubmittedWithErrors = false;
-    //     this.isFormSubmitted = true;
-    //   },
-    //   error: (err) => {
-    //     console.error(err);
-    //     this.isLoading = false;
-    //     this.isFormSubmittedWithErrors = true;
-    //     this.isFormSubmitted = true;
-    //   },
-    // });
   }
 
   ngOnDestroy(): void {
