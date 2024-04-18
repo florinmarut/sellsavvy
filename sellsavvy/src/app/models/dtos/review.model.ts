@@ -2,13 +2,12 @@ import { ArticleDTO } from './article.model';
 import { UserDTO } from './user.model';
 
 export interface ReviewCreateDTO {
-  id: string;
   comment: string;
   rating: number;
   articleId: string;
-  article: ArticleDTO;
+  article?: ArticleDTO;
   userId: string;
-  user: UserDTO;
+  user?: UserDTO;
 }
 
 export interface ReviewUpdateDTO {
