@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RegisterForm } from './forms/register/register.component';
 import { LoginForm } from './forms/login/login.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { CustomSidenavComponent } from './components/custom-sidenav/custom-sidenav.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RegisterForm, LoginForm],
+  imports: [RouterOutlet, RegisterForm, LoginForm, NavigationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

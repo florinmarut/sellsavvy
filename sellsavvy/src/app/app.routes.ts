@@ -13,7 +13,7 @@ import { FailPageComponent } from './pages/fail-page/fail-page.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'articles',
+    redirectTo: 'shop',
     pathMatch: 'full',
   },
   {
@@ -30,7 +30,7 @@ export const routes: Routes = [
     component: LoginPageComponent,
   },
   {
-    path: 'articles',
+    path: 'shop',
     component: ArticlesPageComponent,
   },
   {

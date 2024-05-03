@@ -1,0 +1,34 @@
+<div class="sidenav-header">
+  <img
+    [width]="profilePicSize()"
+    [height]="profilePicSize()"
+    src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_640.png"
+    priority
+    alt="profile picture"
+  />
+  <div class="header-text" [class.hide-header-text]="sidenavCollapsed()">
+    <h2>Name</h2>
+  </div>
+</div>
+
+<mat-nav-list>
+  @for(item of menuItems(); track $index) {
+  <a
+    mat-list-item
+    [routerLink]="item.route"
+    routerLinkActive="menu-item__selected"
+    #rla="routerLinkActive"
+    [activated]="rla.isActive"
+    class="menu-item"
+  >
+    <mat-icon
+      [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'"
+      matListItemIcon
+      >{{ item.icon }}</mat-icon
+    >
+    @if (!sidenavCollapsed()) {
+    <span matListItemTitle> {{ item.label }}</span>
+    }
+  </a>
+  }
+</mat-nav-list>
