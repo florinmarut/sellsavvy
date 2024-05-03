@@ -17,7 +17,7 @@
       <span class="stock"> In Stock: {{ article?.stock }} </span>
     </div>
 
-    <button mat-raised-button color="primary">Add to Cart</button>
+    <button mat-raised-button color="primary" (click)="addToCart()">Add to Cart</button>
   </div>
 
   <div class="article-reviews">

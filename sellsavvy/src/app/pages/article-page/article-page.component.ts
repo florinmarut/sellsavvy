@@ -25,6 +25,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CartItemsService } from '../../services/apis/cart-items.service';
+import { CartItemCreateDTO } from '../../models/dtos/cart-item.model';
 
 @Component({
   selector: 'article-page',
@@ -132,7 +134,8 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
     private readonly _articlesService: ArticlesService,
     private readonly _reviewsService: ReviewsService,
     private readonly _formBuilder: FormBuilder,
-    private readonly _authService: AuthenticationService
+    private readonly _authService: AuthenticationService,
+    private readonly _cartService: CartItemsService
   ) {}
 
   ngOnInit(): void {
@@ -211,6 +214,13 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
       error: (err) => console.error(err),
     });
     this.subscriptions.push(postSubscription);
+  }
+
+  addToCart() {
+    const cartItem: CartItemCreateDTO = {
+      articleId: this.article?.id,
+      userId: ,
+    };
   }
 
   ngOnDestroy(): void {
