@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CustomSidenavComponent } from "../custom-sidenav/custom-sidenav.component";
+import { ProductCardComponent } from "../../product-card/product-card.component";
 
 @Component({
     selector: 'navigation',
@@ -19,7 +20,8 @@ import { CustomSidenavComponent } from "../custom-sidenav/custom-sidenav.compone
         MatButtonModule,
         MatIconModule,
         MatSidenavModule,
-        CustomSidenavComponent
+        CustomSidenavComponent,
+        ProductCardComponent
     ]
 })
 export class NavigationComponent {

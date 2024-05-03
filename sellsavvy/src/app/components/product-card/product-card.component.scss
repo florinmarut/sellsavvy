@@ -1,0 +1,29 @@
+.product-card {
+  width: 250px;
+  margin: 15px;
+
+  .product-card-button {
+    width: 100%;
+  }
+}
+
+.product-card-price {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-card-title {
+    margin: 10px;
+  }
+}
+
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}

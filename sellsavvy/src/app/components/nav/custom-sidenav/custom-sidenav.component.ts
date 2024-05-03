@@ -2,8 +2,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, Input, computed, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MENU_ITEMS } from '../../models/constants.const';
-import { MenuItem } from '../../models/navigation.model';
+import { MENU_ITEMS } from '../../../models/constants.const';
+import { MenuItem } from '../../../models/navigation.model';
 import { RouterModule } from '@angular/router';
 
 @Component({
