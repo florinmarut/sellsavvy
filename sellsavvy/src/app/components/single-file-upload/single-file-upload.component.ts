@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 export class SingleFileUploadComponent {
   status: 'initial' | 'uploading' | 'success' | 'fail' = 'initial';
   file: File | null = null;
+
+  @Input() chooseFileMessage = 'Choose a file';
 
   @Output() upload = new EventEmitter<FormData>();
 

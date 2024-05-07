@@ -1,5 +1,5 @@
 <div class="user-info-container">
-    <img
+  <img
     [width]="32"
     [height]="32"
     src="https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425_640.png"
@@ -9,12 +9,14 @@
 
   <h2>Florin Marut</h2>
 
+  <single-file-upload [chooseFileMessage]="'Change picture'"></single-file-upload>
+
   <section class="contact-info">
     <p><strong>Phone:</strong> number</p>
     <p><strong>Email:</strong> email</p>
   </section>
 
-  <button mat-raised-button color=primary>Edit profile</button>
+  <button mat-raised-button color="primary">Edit profile</button>
 
   <h2>Addresses</h2>
 </div>

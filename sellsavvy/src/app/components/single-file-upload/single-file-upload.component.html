@@ -1,4 +1,4 @@
-<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+<button type="button" mat-raised-button (click)="fileInput.click()">{{chooseFileMessage}}</button>
 <input hidden #fileInput type="file" class="file-input" (change)="onChange($event)" #fileUpload />
 
 @if(file) {
