@@ -7,13 +7,15 @@
     alt="profile picture"
   />
 
-  <h2>Florin Marut</h2>
+  <h2>{{ user?.firstName }} {{ user?.lastName }}</h2>
 
-  <single-file-upload [chooseFileMessage]="'Change picture'"></single-file-upload>
+  <single-file-upload
+    [chooseFileMessage]="'Change picture'"
+  ></single-file-upload>
 
   <section class="contact-info">
-    <p><strong>Phone:</strong> number</p>
-    <p><strong>Email:</strong> email</p>
+    <p><strong>Phone:</strong> {{ user?.phoneNumber }}</p>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
   </section>
 
   <button mat-raised-button color="primary">Edit profile</button>
