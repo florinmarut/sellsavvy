@@ -1,0 +1,15 @@
+.unauthorized-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px; // Adjust for screen size
+  text-align: center;
+  padding: 20px;
+
+  .error-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+}
