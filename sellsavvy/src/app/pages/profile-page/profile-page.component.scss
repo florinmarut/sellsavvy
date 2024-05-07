@@ -1,0 +1,17 @@
+.user-info-container {
+  display: flex;
+  flex-direction: column; // Arrange items vertically
+  align-items: center; // Center horizontally
+  padding: 20px;
+
+  .user-header {
+    display: flex; // For image and name side-by-side
+    align-items: center; // Vertical center for image
+    gap: 10px; // Spacing between image and name
+    margin-bottom: 15px;
+  }
+
+  button {
+    margin-top: 15px;
+  }
+}
