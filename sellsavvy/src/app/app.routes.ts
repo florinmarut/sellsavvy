@@ -9,6 +9,7 @@ import { ArticleFormPageComponent } from './pages/article-form-page/article-form
 import { ArticlePageComponent } from './pages/article-page/article-page.component';
 import { SuccessPageComponent } from './pages/success-page/success-page.component';
 import { FailPageComponent } from './pages/fail-page/fail-page.component';
+import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,11 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
+    canActivate: [authorizationGuard],
+  },
+  {
+    path: 'update-profile',
+    component: ProfileFormComponent,
     canActivate: [authorizationGuard],
   },
   {

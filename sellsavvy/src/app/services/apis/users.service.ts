@@ -32,12 +32,8 @@ export class UsersService {
     return this._crud.post(null, body, this.ROUTE, params);
   }
 
-  updateUser(
-    id: string,
-    body: UserUpdateDTO,
-    params?: QueryParams
-  ): Observable<any> {
-    return this._crud.put(id, body, this.ROUTE, params);
+  updateUser(body: UserUpdateDTO, params?: QueryParams): Observable<any> {
+    return this._crud.put(null, body, this.ROUTE, params);
   }
 
   deleteUser(id: string, params?: QueryParams): Observable<any> {

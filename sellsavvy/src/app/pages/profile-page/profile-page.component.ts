@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SingleFileUploadComponent } from '../../components/single-file-upload/single-file-upload.component';
 import { Subject, takeUntil } from 'rxjs';
 import { UserDTO } from '../../models/dtos/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -17,7 +18,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   
   user: UserDTO | undefined;
 
-  constructor(private readonly authService: AuthenticationService) {}
+  constructor(private readonly authService: AuthenticationService, private readonly _router: Router) {}
 
   ngOnInit() {
     this.authService
@@ -32,6 +33,10 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
           console.log(err);
         },
       });
+  }
+
+  openEditForm() {
+    this._router.navigate(['update-profile']);
   }
 
   ngOnDestroy(): void {
