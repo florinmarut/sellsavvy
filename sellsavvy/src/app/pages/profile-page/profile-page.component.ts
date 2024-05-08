@@ -39,6 +39,10 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     this._router.navigate(['update-profile']);
   }
 
+  openAddressForm() {
+    this._router.navigate(['create-address']);
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();

@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from '../config.service';
 import { CrudService } from '../crud.service';
 import { Observable } from 'rxjs';
-import { AddressCreateDTO, AddressDTO, AddressUpdateDTO } from '../../models/dtos/address.model';
+import {
+  AddressCreateDTO,
+  AddressDTO,
+  AddressUpdateDTO,
+} from '../../models/dtos/address.model';
 import { QueryParams } from '../../models/config.model';
 
 @Injectable({
@@ -28,12 +32,8 @@ export class AddressesService {
     return this._crud.post(null, body, this.ROUTE, params);
   }
 
-  updateAddress(
-    id: string,
-    body: AddressUpdateDTO,
-    params?: QueryParams
-  ): Observable<any> {
-    return this._crud.put(id, body, this.ROUTE, params);
+  updateAddress(body: AddressUpdateDTO, params?: QueryParams): Observable<any> {
+    return this._crud.put(null, body, this.ROUTE, params);
   }
 
   deleteAddress(id: string, params?: QueryParams): Observable<any> {

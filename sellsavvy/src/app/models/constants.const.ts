@@ -55,3 +55,17 @@ export const MENU_ITEMS: MenuItem[] = [
     route: 'sell',
   },
 ];
+
+export const COUNTRIES = [
+  {
+    label: 'Romania',
+    value: Country.Romania,
+  },
+];
+
+export const STATES = [
+  {
+    label: 'Timis',
+    value: State.Timis,
+  },
+];

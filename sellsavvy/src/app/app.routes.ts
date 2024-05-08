@@ -10,6 +10,7 @@ import { ArticlePageComponent } from './pages/article-page/article-page.componen
 import { SuccessPageComponent } from './pages/success-page/success-page.component';
 import { FailPageComponent } from './pages/fail-page/fail-page.component';
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
+import { AddressFormComponent } from './forms/address-form/address-form.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,16 @@ export const routes: Routes = [
   {
     path: 'article-update/:id',
     component: ArticleFormPageComponent,
+    canActivate: [authorizationGuard],
+  },
+  {
+    path: 'create-address',
+    component: AddressFormComponent,
+    canActivate: [authorizationGuard],
+  },
+  {
+    path: 'update-address/:id',
+    component: AddressFormComponent,
     canActivate: [authorizationGuard],
   },
   {
