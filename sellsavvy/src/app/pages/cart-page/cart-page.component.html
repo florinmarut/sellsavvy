@@ -1,3 +1,5 @@
 @for(cartItem of cartItems; track cartItem){
-    <cart-item [item]="cartItem"></cart-item>
+<cart-item [item]="cartItem" (remove)="removeCartItem($event)"></cart-item>
 }
+
+<button mat-raised-button color="primary">Place order</button>

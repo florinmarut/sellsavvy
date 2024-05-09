@@ -28,7 +28,7 @@ export class ProductCardComponent {
   ) {}
 
   viewProduct() {
-    this._router.navigate([`view-article/${this.article.id}`]);
+    this._router.navigate([`view-product/${this.article.id}`]);
   }
 
   addToCart() {

@@ -46,7 +46,7 @@ export const routes: Routes = [
     component: ArticlesPageComponent,
   },
   {
-    path: 'view-article/:id',
+    path: 'view-product/:id',
     component: ArticlePageComponent,
   },
   {

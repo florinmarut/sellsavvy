@@ -12,14 +12,15 @@ import {
 } from 'rxjs';
 import { UserDTO } from '../../models/dtos/user.model';
 import { CartItemDTO } from '../../models/dtos/cart-item.model';
-import { CartItemComponent } from "../../components/cart-item/cart-item.component";
+import { CartItemComponent } from '../../components/cart-item/cart-item.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'app-cart-page',
-    standalone: true,
-    templateUrl: './cart-page.component.html',
-    styleUrl: './cart-page.component.scss',
-    imports: [CartItemComponent]
+  selector: 'app-cart-page',
+  standalone: true,
+  templateUrl: './cart-page.component.html',
+  styleUrl: './cart-page.component.scss',
+  imports: [CartItemComponent, MatButtonModule],
 })
 export class CartPageComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
@@ -52,6 +53,24 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
   fetchCartItems(user: UserDTO): Observable<CartItemDTO[]> {
     return this._cartService.getCartItemsByUserId(user.id);
+  }
+
+  removeCartItem(item: CartItemDTO) {
+    this._cartService
+      .deleteCartItem(item.id)
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((err) => throwError(() => err)),
+        switchMap(() => this.fetchCartItems(this.user))
+      )
+      .subscribe({
+        next: (items) => {
+          this.cartItems = items;
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   ngOnDestroy(): void {
