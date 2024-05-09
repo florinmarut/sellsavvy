@@ -1,6 +1,6 @@
 <mat-card class="product-card">
   <mat-card-header>
-    <mat-card-title>Product Name</mat-card-title>
+    <mat-card-title>{{article.title}}</mat-card-title>
   </mat-card-header>
   <img
     mat-card-image
@@ -8,12 +8,13 @@
     alt="Product Photo"
   />
   <mat-card-content>
-    <p class="product-card-price">$19.99</p>
+    <p class="product-card-price">{{article.price}} RON</p>
   </mat-card-content>
 
   <mat-card-actions>
     <button class="product-card-button" mat-raised-button color="primary">
       Add to Cart
     </button>
+    <button mat-button color="primary" (click)="viewProduct()">View</button>
   </mat-card-actions>
 </mat-card>

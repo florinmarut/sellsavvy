@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { ArticleDTO } from '../../models/dtos/article.model';
 
 @Component({
   selector: 'paged-table',
@@ -11,4 +12,5 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 })
 export class PagedTableComponent {
   @Input() columns: number = 4;
+  @Input() articles: ArticleDTO[] | undefined;
 }
