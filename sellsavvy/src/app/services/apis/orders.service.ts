@@ -8,6 +8,7 @@ import {
   OrderDTO,
   OrderUpdateDTO,
 } from '../../models/dtos/order.model';
+import { PagedData } from '../../models/dtos/paged.model';
 
 @Injectable({
   providedIn: 'root',
@@ -42,5 +43,21 @@ export class OrdersService {
 
   deleteOrder(id: string, params?: QueryParams): Observable<any> {
     return this._crud.delete(id, this.ROUTE, params);
+  }
+
+  getPaged(
+    pageNumber: number,
+    pageSize: number,
+    filters?: string,
+    sort?: string,
+    order?: string
+  ): Observable<PagedData<OrderDTO>> {
+    return this._crud.get(null, `${this.ROUTE}/paged`, {
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+      filters: filters,
+      sort: sort,
+      order: order,
+    });
   }
 }

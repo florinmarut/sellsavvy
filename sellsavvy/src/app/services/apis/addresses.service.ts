@@ -41,6 +41,13 @@ export class AddressesService {
     return this._crud.delete(id, this.ROUTE, params);
   }
 
+  getAddressesByUserId(
+    id: string,
+    params?: QueryParams
+  ): Observable<Array<AddressDTO>> {
+    return this._crud.get(id, this.ROUTE + '/user', params);
+  }
+
   getPaged(
     pageNumber: number,
     pageSize: number,

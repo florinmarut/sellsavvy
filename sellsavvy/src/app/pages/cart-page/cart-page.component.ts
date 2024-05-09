@@ -5,6 +5,7 @@ import {
   Observable,
   Subject,
   catchError,
+  forkJoin,
   map,
   switchMap,
   takeUntil,
@@ -14,6 +15,8 @@ import { UserDTO } from '../../models/dtos/user.model';
 import { CartItemDTO } from '../../models/dtos/cart-item.model';
 import { CartItemComponent } from '../../components/cart-item/cart-item.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AddressDTO } from '../../models/dtos/address.model';
+import { AddressesService } from '../../services/apis/addresses.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -25,34 +28,50 @@ import { MatButtonModule } from '@angular/material/button';
 export class CartPageComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   cartItems!: CartItemDTO[];
+  addresses!: AddressDTO[];
   user!: UserDTO;
 
   constructor(
     private readonly _authService: AuthenticationService,
-    private readonly _cartService: CartItemsService
+    private readonly _cartService: CartItemsService,
+    private readonly _addressesService: AddressesService
   ) {}
   ngOnInit(): void {
-    this._authService
-      .getProfile()
-      .pipe(
-        takeUntil(this.destroy$),
-        catchError((err) => throwError(() => err)),
-        map((user: UserDTO) => {
-          this.user = user;
-          return user;
-        }),
-        switchMap((user: UserDTO) => this.fetchCartItems(user))
+    this.fetchAll().subscribe({
+      next: ([cartItems, addresses]) => {
+        this.cartItems = cartItems;
+        this.addresses = addresses;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  fetchAll(): Observable<[CartItemDTO[], AddressDTO[]]> {
+    return this._authService.getProfile().pipe(
+      takeUntil(this.destroy$),
+      catchError((err) => throwError(() => err)),
+      map((user: UserDTO) => {
+        this.user = user;
+        return user;
+      }),
+      switchMap((user: UserDTO) =>
+        forkJoin([
+          // Execute requests in parallel
+          this.fetchCartItems(user),
+          this.fetchAddresses(user),
+        ])
       )
-      .subscribe({
-        next: (cartItems) => {
-          this.cartItems = cartItems;
-        },
-        error: (err) => console.error(err),
-      });
+    );
   }
 
   fetchCartItems(user: UserDTO): Observable<CartItemDTO[]> {
     return this._cartService.getCartItemsByUserId(user.id);
+  }
+
+  fetchAddresses(user: UserDTO): Observable<AddressDTO[]> {
+    return this._addressesService.getAddressesByUserId(user.id);
   }
 
   removeCartItem(item: CartItemDTO) {
@@ -61,11 +80,12 @@ export class CartPageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         catchError((err) => throwError(() => err)),
-        switchMap(() => this.fetchCartItems(this.user))
+        switchMap(() => this.fetchAll())
       )
       .subscribe({
-        next: (items) => {
-          this.cartItems = items;
+        next: ([cartItems, addresses]) => {
+          this.cartItems = cartItems;
+          this.addresses = addresses;
         },
         error: (err) => {
           console.error(err);

@@ -8,6 +8,7 @@ import {
   CartItemDTO,
   CartItemUpdateDTO,
 } from '../../models/dtos/cart-item.model';
+import { PagedData } from '../../models/dtos/paged.model';
 
 @Injectable({
   providedIn: 'root',
@@ -52,5 +53,21 @@ export class CartItemsService {
     params?: QueryParams
   ): Observable<Array<CartItemDTO>> {
     return this._crud.get(id, this.ROUTE + '/user', params);
+  }
+
+  getPaged(
+    pageNumber: number,
+    pageSize: number,
+    filters?: string,
+    sort?: string,
+    order?: string
+  ): Observable<PagedData<CartItemDTO>> {
+    return this._crud.get(null, `${this.ROUTE}/paged`, {
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+      filters: filters,
+      sort: sort,
+      order: order,
+    });
   }
 }
