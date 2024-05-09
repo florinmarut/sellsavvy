@@ -1,0 +1,3 @@
+@for(address of addresses?.items; track address) {
+<address [address]="address" (delete)="deleteAddress($event)"></address>
+}

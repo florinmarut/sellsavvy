@@ -18,8 +18,14 @@
     <p><strong>Email:</strong> {{ user?.email }}</p>
   </section>
 
-  <button mat-raised-button color="primary" (click)="openEditForm()">Edit profile</button>
+  <button mat-raised-button color="primary" (click)="openEditForm()">
+    Edit profile
+  </button>
 
   <h2>Addresses</h2>
-  <button mat-raised-button color="primary" (click)="openAddressForm()">Add address</button>
+  <button mat-raised-button color="primary" (click)="openAddressForm()">
+    Add address
+  </button>
+
+  <address-list></address-list>
 </div>

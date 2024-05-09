@@ -69,3 +69,11 @@ export const STATES = [
     value: State.Timis,
   },
 ];
+
+export const CountriesMap: Map<Country, string> = new Map<Country, string>([
+  [Country.Romania, 'Romania'],
+]);
+
+export const StatesMap: Map<State, string> = new Map<State, string>([
+  [State.Timis, 'Timis'],
+]);

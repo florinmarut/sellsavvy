@@ -7,7 +7,10 @@ export function formatQueryUrl(qp: QueryParams): string {
 }
 
 export function mapQueryParamsToUrl(qp: QueryParams): Array<string> {
-  return Object.keys(qp).map((key: string) => {
-    return `${key}=${qp[key]}`;
-  });
+
+  return Object.keys(qp)
+    .filter((key) => qp[key] != null)
+    .map((key: string) => {
+      return `${key}=${qp[key]}`;
+    });
 }

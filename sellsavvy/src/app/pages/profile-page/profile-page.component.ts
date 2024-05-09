@@ -5,20 +5,24 @@ import { SingleFileUploadComponent } from '../../components/single-file-upload/s
 import { Subject, takeUntil } from 'rxjs';
 import { UserDTO } from '../../models/dtos/user.model';
 import { Router } from '@angular/router';
+import { AddressListComponent } from '../../components/address-list/address-list.component';
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',
-  imports: [MatButtonModule, SingleFileUploadComponent],
+  imports: [MatButtonModule, SingleFileUploadComponent, AddressListComponent],
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
-  
   user: UserDTO | undefined;
+  addressListFilter: string | undefined;
 
-  constructor(private readonly authService: AuthenticationService, private readonly _router: Router) {}
+  constructor(
+    private readonly authService: AuthenticationService,
+    private readonly _router: Router
+  ) {}
 
   ngOnInit() {
     this.authService
