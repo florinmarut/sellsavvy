@@ -41,16 +41,20 @@ export const routes: Routes = [
     component: ArticlesPageComponent,
   },
   {
+    path: 'my-products',
+    component: ArticlesPageComponent,
+  },
+  {
     path: 'view-article/:id',
     component: ArticlePageComponent,
   },
   {
-    path: 'article-create',
+    path: 'create-product',
     component: ArticleFormPageComponent,
     canActivate: [authorizationGuard],
   },
   {
-    path: 'article-update/:id',
+    path: 'update-product/:id',
     component: ArticleFormPageComponent,
     canActivate: [authorizationGuard],
   },

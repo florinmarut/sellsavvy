@@ -47,7 +47,7 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     label: 'My products',
     icon: 'inventory',
-    route: 'products',
+    route: 'my-products',
   },
   {
     label: 'Sold',

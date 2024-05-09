@@ -15,4 +15,5 @@ export class PagedTableComponent {
   @Input() columns: number = 4;
   @Input() articles: ArticleDTO[] | undefined;
   @Input() loggedInUser: UserDTO | undefined;
+  @Input() canEdit: boolean = false;
 }

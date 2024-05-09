@@ -12,9 +12,18 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button class="product-card-button" mat-raised-button color="primary" (click)="addToCart()">
-      Add to Cart
-    </button>
+    @if (!canEdit) {
+      <button class="product-card-button" mat-raised-button color="primary" (click)="addToCart()">
+        Add to Cart
+      </button>
+    } @else {
+      <button class="product-card-button" mat-raised-button color="primary" (click)="editArticle()">
+        Edit
+      </button>
+      <button class="product-card-button" mat-raised-button color="primary" (click)="deleteArticle()">
+        Delete
+      </button>
+    }
     <button mat-button color="primary" (click)="viewProduct()">View</button>
   </mat-card-actions>
 </mat-card>
