@@ -11,6 +11,7 @@ import { SuccessPageComponent } from './pages/success-page/success-page.componen
 import { FailPageComponent } from './pages/fail-page/fail-page.component';
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 import { AddressFormComponent } from './forms/address-form/address-form.component';
+import { CartPageComponent } from './pages/cart-page/cart-page.component';
 
 export const routes: Routes = [
   {
@@ -75,6 +76,10 @@ export const routes: Routes = [
   {
     path: 'fail',
     component: FailPageComponent,
+  },
+  {
+    path: 'cart',
+    component: CartPageComponent,
   },
   {
     path: '**',
