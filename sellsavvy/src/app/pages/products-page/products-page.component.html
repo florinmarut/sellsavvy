@@ -1,4 +1,4 @@
 @if (canEdit) {
     <button mat-raised-button color="primary" (click)="addProduct()">Add new product</button>
 }
-<paged-table [loggedInUser]="user" [articles]="pagedArticles?.items" [canEdit]="canEdit"></paged-table>
+<paged-table [loggedInUser]="user" [products]="pagedproducts?.items" [canEdit]="canEdit"></paged-table>

@@ -1,26 +1,26 @@
-<div class="article-container">
-  <div class="article-image">
-    <img src="https://picsum.photos/id/237/400/300" alt="Article Image" />
+<div class="product-container">
+  <div class="product-image">
+    <img src="https://picsum.photos/id/237/400/300" alt="product Image" />
   </div>
 
-  <div class="article-details">
-    <h2 class="article-title">{{ article?.title }}</h2>
-    <p class="article-description">{{ article?.description }}</p>
+  <div class="product-details">
+    <h2 class="product-title">{{ product?.title }}</h2>
+    <p class="product-description">{{ product?.description }}</p>
 
-    <div class="article-info">
+    <div class="product-info">
       <span class="price">
-        {{ article?.price | currency }}
+        {{ product?.price | currency }}
       </span>
-      <span *ngIf="article?.rating" class="rating">
-        <mat-icon>star</mat-icon> {{ article?.rating }}/5
+      <span *ngIf="product?.rating" class="rating">
+        <mat-icon>star</mat-icon> {{ product?.rating }}/5
       </span>
-      <span class="stock"> In Stock: {{ article?.stock }} </span>
+      <span class="stock"> In Stock: {{ product?.stock }} </span>
     </div>
 
     <button mat-raised-button color="primary">Add to Cart</button>
   </div>
 
-  <div class="article-reviews">
+  <div class="product-reviews">
     <h3 class="reviews-title">Reviews</h3>
 
     <div class="review" *ngFor="let review of reviews?.items">

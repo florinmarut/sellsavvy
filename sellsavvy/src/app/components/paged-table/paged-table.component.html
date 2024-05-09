@@ -1,7 +1,7 @@
 <mat-grid-list [cols]="columns" rowHeight="400px">
-  @for(article of articles; track article){
+  @for(product of products; track product){
   <mat-grid-tile
-    ><product-card [loggedInUser]="loggedInUser" [article]="article" [canEdit]="canEdit"></product-card
+    ><product-card [loggedInUser]="loggedInUser" [product]="product" [canEdit]="canEdit"></product-card
   ></mat-grid-tile>
   }
 </mat-grid-list>

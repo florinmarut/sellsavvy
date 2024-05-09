@@ -1,7 +1,8 @@
-import { Address } from 'cluster';
+
 import { OrderStatus } from '../constants.const';
 import { UserDTO } from './user.model';
-import { OrderItemDTO } from './order-item.model';
+import { AddressDTO } from './address.model';
+import { ProductDTO } from './product.model';
 
 export interface OrderCreateDTO {
   id: string;
@@ -12,8 +13,8 @@ export interface OrderCreateDTO {
   sellerId: string;
   seller: UserDTO;
   addressId: string;
-  address: Address;
-  items: Array<OrderItemDTO>;
+  address: AddressDTO;
+  product: ProductDTO;
 }
 
 export interface OrderUpdateDTO {
@@ -25,8 +26,8 @@ export interface OrderUpdateDTO {
   sellerId: string;
   seller: UserDTO;
   addressId: string;
-  address: Address;
-  items: Array<OrderItemDTO>;
+  address: AddressDTO;
+  product: ProductDTO;
 }
 
 export interface OrderDTO {
@@ -38,6 +39,6 @@ export interface OrderDTO {
   sellerId: string;
   seller: UserDTO;
   addressId: string;
-  address: Address;
-  items: Array<OrderItemDTO>;
+  address: AddressDTO;
+  product: ProductDTO;
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ArticlesService } from '../../services/apis/articles.service';
+import { productsService } from '../../services/apis/products.service';
 import {
   FormBuilder,
   FormGroup,
@@ -13,13 +13,12 @@ import { SuccessCardComponent } from '../../components/success-card/success-card
 import { FailCardComponent } from '../../components/fail-card/fail-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
-import { UserDTO } from '../../models/dtos/user.model';
 import { Subscription, catchError, map, switchMap, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArticleDTO } from '../../models/dtos/article.model';
+import { ProductDTO } from '../../models/dtos/product.model';
 
 @Component({
-  selector: 'article-form',
+  selector: 'product-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -33,22 +32,22 @@ import { ArticleDTO } from '../../models/dtos/article.model';
     FailCardComponent,
     MatProgressSpinnerModule,
   ],
-  templateUrl: './article-form.component.html',
-  styleUrl: './article-form.component.scss',
+  templateUrl: './product-form.component.html',
+  styleUrl: './product-form.component.scss',
 })
-export class ArticleFormComponent implements OnInit, OnDestroy {
-  articleForm!: FormGroup;
+export class ProductFormComponent implements OnInit, OnDestroy {
+  productForm!: FormGroup;
   isFormSubmitted = false;
   isFormSubmittedWithErrors = false;
   isLoading = false;
   isFormInEditMode = false;
 
-  private _articleId!: string;
+  private _productId!: string;
 
-  postArticleSubscription!: Subscription;
+  postproductSubscription!: Subscription;
 
   constructor(
-    private readonly _articlesService: ArticlesService,
+    private readonly _productsService: productsService,
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService,
     private readonly _route: ActivatedRoute,
@@ -56,24 +55,24 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.initArticleForm();
+    this.initproductForm();
 
     this._route.paramMap.subscribe((params) => {
-      this.initArticleForm(params.get('id') as string);
+      this.initproductForm(params.get('id') as string);
     });
   }
 
-  initArticleForm(id?: string) {
+  initproductForm(id?: string) {
     if (id) {
       this.isFormInEditMode = true;
-      this._articlesService.getArticle(id).subscribe({
-        next: (article: ArticleDTO) => {
-          this._articleId = article.id;
-          this.articleForm = this._formBuilder.group({
-            title: [article.title, [Validators.required]],
-            description: [article.description, [Validators.required]],
-            price: [article.price, [Validators.required]],
-            stock: [article.stock, [Validators.required]],
+      this._productsService.getproduct(id).subscribe({
+        next: (product: ProductDTO) => {
+          this._productId = product.id;
+          this.productForm = this._formBuilder.group({
+            title: [product.title, [Validators.required]],
+            description: [product.description, [Validators.required]],
+            price: [product.price, [Validators.required]],
+            stock: [product.stock, [Validators.required]],
           });
         },
         error: (err) => {
@@ -83,7 +82,7 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
       });
     } else {
       this.isFormInEditMode = false;
-      this.articleForm = this._formBuilder.group({
+      this.productForm = this._formBuilder.group({
         title: ['', [Validators.required]],
         description: ['', [Validators.required]],
         price: [0, [Validators.required]],
@@ -94,16 +93,16 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isLoading = true;
-    const article = this.articleForm.value;
+    const product = this.productForm.value;
 
-    if (this._articleId) article.id = this._articleId;
+    if (this._productId) product.id = this._productId;
 
-    this.postArticleSubscription = this._authService
+    this.postproductSubscription = this._authService
       .getProfile()
       .pipe(
         map((user) => {
-          article.sellerId = user?.id;
-          return article;
+          product.sellerId = user?.id;
+          return product;
         }),
         catchError((error) => {
           this.isLoading = false;
@@ -113,8 +112,8 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
         }),
         switchMap((value) => {
           if (!this.isFormInEditMode) {
-            return this._articlesService.createArticle(value).pipe(
-              map((articleValue) => {
+            return this._productsService.createproduct(value).pipe(
+              map((productValue) => {
                 this.isLoading = false;
                 this.isFormSubmittedWithErrors = false;
                 this.isFormSubmitted = true;
@@ -127,8 +126,8 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
               })
             );
           } else {
-            return this._articlesService.updateArticle(value).pipe(
-              map((articleValue) => {
+            return this._productsService.updateproduct(value).pipe(
+              map((productValue) => {
                 this.isLoading = false;
                 this.isFormSubmittedWithErrors = false;
                 this.isFormSubmitted = true;
@@ -147,6 +146,6 @@ export class ArticleFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.postArticleSubscription?.unsubscribe();
+    this.postproductSubscription?.unsubscribe();
   }
 }

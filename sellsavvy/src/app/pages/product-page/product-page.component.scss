@@ -1,4 +1,4 @@
-.article-container {
+.product-container {
   display: flex;
   flex-direction: column; // Stack elements vertically by default
   gap: 20px;
@@ -6,7 +6,7 @@
   border-radius: 8px;
   padding: 20px;
 
-  .article-image {
+  .product-image {
     flex: 0 0 100%; // Take full width on smaller screens
     order: 1; // Place the image first
 
@@ -21,17 +21,17 @@
     }
   }
 
-  .article-details {
+  .product-details {
     flex: 1; // Takes up available space
     order: 2; // Position the details beneath the image
 
-    .article-title {
+    .product-title {
       font-size: 22px;
       font-weight: 600;
       margin-bottom: 10px;
     }
 
-    .article-info {
+    .product-info {
       display: flex;
       align-items: center;
       margin-bottom: 15px;
@@ -69,7 +69,7 @@
   }
 }
 
-.article-reviews {
+.product-reviews {
   margin-top: 30px;
   order: 3; // Move reviews to the bottom
 

@@ -3,7 +3,7 @@
   "port": "7218",
   "addresses": {
     "addresses": "addresses",
-    "articles": "articles",
+    "products": "products",
     "cartItems": "cartItems",
     "orderItems": "orderItems",
     "orders": "orders",

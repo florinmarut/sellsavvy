@@ -3,45 +3,45 @@ import { CrudService } from '../crud.service';
 import { ConfigService } from '../config.service';
 import { QueryParams } from '../../models/config.model';
 import {
-  ArticleCreateDTO,
-  ArticleDTO,
-  ArticleUpdateDTO,
-} from '../../models/dtos/article.model';
+  ProductCreateDTO,
+  ProductDTO,
+  ProductUpdateDTO,
+} from '../../models/dtos/product.model';
 import { Observable } from 'rxjs';
 import { PagedData } from '../../models/dtos/paged.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ArticlesService {
-  private readonly ROUTE = this._config.getConfig().addresses['articles'];
+export class productsService {
+  private readonly ROUTE = this._config.getConfig().addresses['products'];
 
   constructor(
     private readonly _config: ConfigService,
     private readonly _crud: CrudService
   ) {}
 
-  getArticles(params?: QueryParams): Observable<Array<ArticleDTO>> {
+  getproducts(params?: QueryParams): Observable<Array<ProductDTO>> {
     return this._crud.get(null, this.ROUTE, params);
   }
 
-  getArticle(id: string, params?: QueryParams): Observable<ArticleDTO> {
+  getproduct(id: string, params?: QueryParams): Observable<ProductDTO> {
     return this._crud.get(id, this.ROUTE, params);
   }
 
-  createArticle(body: ArticleCreateDTO, params?: QueryParams): Observable<any> {
+  createproduct(body: ProductCreateDTO, params?: QueryParams): Observable<any> {
     return this._crud.post(null, body, this.ROUTE, params);
   }
 
-  updateArticle(
-    body: ArticleUpdateDTO,
+  updateproduct(
+    body: ProductUpdateDTO,
     id?: string,
     params?: QueryParams
   ): Observable<any> {
     return this._crud.put(id, body, this.ROUTE, params);
   }
 
-  deleteArticle(id: string, params?: QueryParams): Observable<any> {
+  deleteproduct(id: string, params?: QueryParams): Observable<any> {
     return this._crud.delete(id, this.ROUTE, params);
   }
 
@@ -51,7 +51,7 @@ export class ArticlesService {
     filters?: string,
     sort?: string,
     order?: string
-  ): Observable<PagedData<ArticleDTO>> {
+  ): Observable<PagedData<ProductDTO>> {
     return this._crud.get(null, `${this.ROUTE}/paged`, {
       pageNumber: pageNumber,
       pageSize: pageSize,

@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ArticleDTO } from '../../models/dtos/article.model';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +13,7 @@ import {
   switchMap,
   throwError,
 } from 'rxjs';
-import { ArticlesService } from '../../services/apis/articles.service';
+import { productsService } from '../../services/apis/products.service';
 import { ReviewCreateDTO, ReviewDTO } from '../../models/dtos/review.model';
 import { ReviewsService } from '../../services/apis/reviews.service';
 import { PagedData } from '../../models/dtos/paged.model';
@@ -25,9 +24,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ProductDTO } from '../../models/dtos/product.model';
 
 @Component({
-  selector: 'article-page',
+  selector: 'product-page',
   standalone: true,
   imports: [
     MatIconModule,
@@ -37,11 +37,11 @@ import { AuthenticationService } from '../../services/authentication.service';
     MatInputModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './article-page.component.html',
-  styleUrl: './article-page.component.scss',
+  templateUrl: './product-page.component.html',
+  styleUrl: './product-page.component.scss',
 })
-export class ArticlePageComponent implements OnInit, OnDestroy {
-  article: ArticleDTO | undefined;
+export class ProductPageComponent implements OnInit, OnDestroy {
+  product: ProductDTO | undefined;
   reviews: PagedData<ReviewDTO> | undefined;
   reviewForm!: FormGroup;
 
@@ -49,7 +49,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly _route: ActivatedRoute,
-    private readonly _articlesService: ArticlesService,
+    private readonly _productsService: productsService,
     private readonly _reviewsService: ReviewsService,
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService
@@ -62,11 +62,11 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
       map((params) => params.get('id')),
       switchMap((id) => {
         return combineLatest([
-          this._articlesService.getArticle(id as string),
+          this._productsService.getproduct(id as string),
           this._reviewsService.getPagedReviews(
             1,
             15,
-            `ArticleId==\"${id}\"`,
+            `ProductId==\"${id}\"`,
             'id',
             'desc'
           ),
@@ -78,8 +78,8 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
     );
 
     const fetchDataSubscription = fetchData$.subscribe({
-      next: ([article, reviews]) => {
-        this.article = article;
+      next: ([product, reviews]) => {
+        this.product = product;
         this.reviews = reviews;
       },
       error: (err) => console.error(err),
@@ -103,7 +103,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
         const review: ReviewCreateDTO = {
           comment: value.comment,
           rating: value.rating,
-          articleId: this.article?.id as string,
+          productId: this.product?.id as string,
           userId: user.id,
         };
 
@@ -115,7 +115,7 @@ export class ArticlePageComponent implements OnInit, OnDestroy {
           this._reviewsService.getPagedReviews(
             1,
             15,
-            `ArticleId==\"${review.articleId}\"`,
+            `productId==\"${review.productId}\"`,
             'id',
             'desc'
           ),

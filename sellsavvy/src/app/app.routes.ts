@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 import { UnauthorizedPageComponent } from './pages/unauthorized-page/unauthorized-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { ArticlesPageComponent } from './pages/articles-page/articles-page.component';
+import { ProductsPageComponent } from './pages/products-page/products-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { authorizationGuard } from './guards/authorization.guard';
-import { ArticleFormPageComponent } from './pages/article-form-page/article-form-page.component';
-import { ArticlePageComponent } from './pages/article-page/article-page.component';
+import { ProductFormPageComponent } from './pages/product-form-page/product-form-page.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { SuccessPageComponent } from './pages/success-page/success-page.component';
 import { FailPageComponent } from './pages/fail-page/fail-page.component';
 import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
@@ -39,24 +39,24 @@ export const routes: Routes = [
   },
   {
     path: 'shop',
-    component: ArticlesPageComponent,
+    component: ProductsPageComponent,
   },
   {
     path: 'my-products',
-    component: ArticlesPageComponent,
+    component: ProductsPageComponent,
   },
   {
     path: 'view-product/:id',
-    component: ArticlePageComponent,
+    component: ProductPageComponent,
   },
   {
     path: 'create-product',
-    component: ArticleFormPageComponent,
+    component: ProductFormPageComponent,
     canActivate: [authorizationGuard],
   },
   {
     path: 'update-product/:id',
-    component: ArticleFormPageComponent,
+    component: ProductFormPageComponent,
     canActivate: [authorizationGuard],
   },
   {

@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ArticleDTO } from '../../models/dtos/article.model';
+import { ProductDTO } from '../../models/dtos/product.model';
 import { Router } from '@angular/router';
 import { CartItemsService } from '../../services/apis/cart-items.service';
 import { CartItemCreateDTO } from '../../models/dtos/cart-item.model';
 import { UserDTO } from '../../models/dtos/user.model';
-import { ArticlesService } from '../../services/apis/articles.service';
+import { productsService } from '../../services/apis/products.service';
 
 @Component({
   selector: 'product-card',
@@ -17,24 +17,24 @@ import { ArticlesService } from '../../services/apis/articles.service';
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-  @Input() article!: ArticleDTO;
+  @Input() product!: ProductDTO;
   @Input() loggedInUser: UserDTO | undefined;
   @Input() canEdit: boolean = false;
 
   constructor(
     private readonly _router: Router,
     private readonly _cartService: CartItemsService,
-    private readonly _articlesService: ArticlesService
+    private readonly _productsService: productsService
   ) {}
 
   viewProduct() {
-    this._router.navigate([`view-product/${this.article.id}`]);
+    this._router.navigate([`view-product/${this.product.id}`]);
   }
 
   addToCart() {
     const cartItem: CartItemCreateDTO = {
       amount: 1,
-      articleId: this.article.id,
+      productId: this.product.id,
       userId: this.loggedInUser?.id ?? '',
     };
     this._cartService.createCartItem(cartItem).subscribe({
@@ -43,12 +43,12 @@ export class ProductCardComponent {
     });
   }
 
-  editArticle() {
-    this._router.navigate([`update-product/${this.article.id}`]);
+  editproduct() {
+    this._router.navigate([`update-product/${this.product.id}`]);
   }
 
-  deleteArticle() {
-    this._articlesService.deleteArticle(this.article.id).subscribe({
+  deleteproduct() {
+    this._productsService.deleteproduct(this.product.id).subscribe({
       next: (value) => {
         this._router.navigate(['success']);
       },

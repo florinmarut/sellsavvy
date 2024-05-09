@@ -1,6 +1,6 @@
 <mat-card class="product-card">
   <mat-card-header>
-    <mat-card-title>{{article.title}}</mat-card-title>
+    <mat-card-title>{{product.title}}</mat-card-title>
   </mat-card-header>
   <img
     mat-card-image
@@ -8,7 +8,7 @@
     alt="Product Photo"
   />
   <mat-card-content>
-    <p class="product-card-price">{{article.price}} RON</p>
+    <p class="product-card-price">{{product.price}} RON</p>
   </mat-card-content>
 
   <mat-card-actions>
@@ -17,10 +17,10 @@
         Add to Cart
       </button>
     } @else {
-      <button class="product-card-button" mat-raised-button color="primary" (click)="editArticle()">
+      <button class="product-card-button" mat-raised-button color="primary" (click)="editproduct()">
         Edit
       </button>
-      <button class="product-card-button" mat-raised-button color="primary" (click)="deleteArticle()">
+      <button class="product-card-button" mat-raised-button color="primary" (click)="deleteproduct()">
         Delete
       </button>
     }

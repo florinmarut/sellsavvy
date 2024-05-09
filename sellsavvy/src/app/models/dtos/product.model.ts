@@ -1,7 +1,7 @@
 import { ReviewDTO } from './review.model';
 import { UserDTO } from './user.model';
 
-export interface ArticleCreateDTO {
+export interface ProductCreateDTO {
   id: string;
   title: string;
   description: string;
@@ -13,7 +13,7 @@ export interface ArticleCreateDTO {
   reviews: Array<ReviewDTO>;
 }
 
-export interface ArticleUpdateDTO {
+export interface ProductUpdateDTO {
   id: string;
   title: string;
   description: string;
@@ -25,7 +25,7 @@ export interface ArticleUpdateDTO {
   reviews: Array<ReviewDTO>;
 }
 
-export interface ArticleDTO {
+export interface ProductDTO {
   id: string;
   title: string;
   description: string;

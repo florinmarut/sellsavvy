@@ -18,7 +18,7 @@ export class CartItemComponent {
   constructor(private readonly _router: Router) {}
 
   viewProduct() {
-    this._router.navigate([`view-product/${this.item.article.id}`]);
+    this._router.navigate([`view-product/${this.item.product.id}`]);
   }
   removeItem() {this.remove.emit(this.item)}
 }

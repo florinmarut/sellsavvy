@@ -4,19 +4,19 @@
 </div>
 } @else if(isFormSubmitted) {
 <success-card
-  [title]="'Article posted!'"
-  [message]="'Your article have been successfully posted to SellSavvy!'"
+  [title]="'product posted!'"
+  [message]="'Your product have been successfully posted to SellSavvy!'"
 ></success-card
 >} @else if(isFormSubmittedWithErrors) {
 <fail-card
   [title]="'Fail!'"
   [message]="
-    'An error occurred trying to post your article! Please try again later!'
+    'An error occurred trying to post your product! Please try again later!'
   "
 ></fail-card>
 } @else {
 <div class="form-container">
-  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="form">
     <mat-form-field>
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" />
@@ -41,8 +41,8 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!articleForm.valid"
-      [class.button--disabled]="articleForm.invalid"
+      [disabled]="!productForm.valid"
+      [class.button--disabled]="productForm.invalid"
     >
       Submit
     </button>

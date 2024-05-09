@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { ArticleDTO } from '../../models/dtos/article.model';
+import { ProductDTO } from '../../models/dtos/product.model';
 import { UserDTO } from '../../models/dtos/user.model';
 
 @Component({
@@ -13,7 +13,7 @@ import { UserDTO } from '../../models/dtos/user.model';
 })
 export class PagedTableComponent {
   @Input() columns: number = 4;
-  @Input() articles: ArticleDTO[] | undefined;
+  @Input() products: ProductDTO[] | undefined;
   @Input() loggedInUser: UserDTO | undefined;
   @Input() canEdit: boolean = false;
 }
