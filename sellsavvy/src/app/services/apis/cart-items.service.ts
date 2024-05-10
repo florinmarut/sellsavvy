@@ -48,6 +48,10 @@ export class CartItemsService {
     return this._crud.delete(id, this.ROUTE, params);
   }
 
+  clearCart(userId: string, params?: QueryParams): Observable<any> {
+    return this._crud.delete(userId, `${this.ROUTE}/clear`, params);
+  }
+
   getCartItemsByUserId(
     id: string,
     params?: QueryParams

@@ -2,4 +2,15 @@
 <cart-item [item]="cartItem" (remove)="removeCartItem($event)"></cart-item>
 }
 
-<button mat-raised-button color="primary">Place order</button>
+<form #addressForm="ngForm" (ngSubmit)="submitOrder()">
+  <select name="address" [(ngModel)]="selectedAddressId">
+    @for(address of addresses; track address){
+    <option [value]="address.id">
+      {{ countries.get(address.country) }}, {{ states.get(address.state) }},
+      {{ address.city }}
+    </option>
+    }
+  </select>
+
+  <button mat-raised-button color="primary" type="submit">Place order</button>
+</form>

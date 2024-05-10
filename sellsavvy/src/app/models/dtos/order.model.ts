@@ -1,20 +1,20 @@
-
 import { OrderStatus } from '../constants.const';
 import { UserDTO } from './user.model';
 import { AddressDTO } from './address.model';
 import { ProductDTO } from './product.model';
 
 export interface OrderCreateDTO {
-  id: string;
+  id?: string;
   status: OrderStatus;
   price: number;
   buyerId: string;
-  buyer: UserDTO;
+  buyer?: UserDTO;
   sellerId: string;
-  seller: UserDTO;
+  seller?: UserDTO;
   addressId: string;
-  address: AddressDTO;
-  product: ProductDTO;
+  address?: AddressDTO;
+  productId: string;
+  product?: ProductDTO;
 }
 
 export interface OrderUpdateDTO {
@@ -27,6 +27,7 @@ export interface OrderUpdateDTO {
   seller: UserDTO;
   addressId: string;
   address: AddressDTO;
+  productId: string;
   product: ProductDTO;
 }
 
@@ -40,5 +41,6 @@ export interface OrderDTO {
   seller: UserDTO;
   addressId: string;
   address: AddressDTO;
+  productId: string;
   product: ProductDTO;
 }

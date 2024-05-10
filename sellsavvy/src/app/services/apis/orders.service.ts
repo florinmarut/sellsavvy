@@ -33,6 +33,13 @@ export class OrdersService {
     return this._crud.post(null, body, this.ROUTE, params);
   }
 
+  createOrdersList(
+    orders: OrderCreateDTO[],
+    params?: QueryParams
+  ): Observable<any> {
+    return this._crud.post(null, orders, `${this.ROUTE}/createmany`, params);
+  }
+
   updateOrder(
     id: string,
     body: OrderUpdateDTO,
