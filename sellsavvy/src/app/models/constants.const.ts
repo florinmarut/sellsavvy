@@ -77,3 +77,13 @@ export const CountriesMap: Map<Country, string> = new Map<Country, string>([
 export const StatesMap: Map<State, string> = new Map<State, string>([
   [State.Timis, 'Timis'],
 ]);
+
+export const OrderStatuses: Map<OrderStatus, string> = new Map<
+  OrderStatus,
+  string
+>([
+  [OrderStatus.Delivered, 'Delivered'],
+  [OrderStatus.InProgress, 'In progress'],
+  [OrderStatus.Placed, 'Placed'],
+  [OrderStatus.Returned, 'Returned'],
+]);

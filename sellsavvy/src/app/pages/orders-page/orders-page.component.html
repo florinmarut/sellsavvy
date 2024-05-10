@@ -1,0 +1,3 @@
+@for(order of orders; track orders) {
+    <order [value]="order" (cancel)="cancelOrder($event)"></order>
+}

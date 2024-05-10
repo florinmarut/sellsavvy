@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title
+      >{{ value.id }} - {{ statuses.get(value.status) }}</mat-card-title
+    >
+  </mat-card-header>
+  <mat-card-content>
+    {{ value.product.title }}
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="viewProduct()">
+      View product
+    </button>
+    <button mat-raised-button color="primary" (click)="cancelOrder()">
+      Cancel order
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -41,11 +41,10 @@ export class OrdersService {
   }
 
   updateOrder(
-    id: string,
     body: OrderUpdateDTO,
     params?: QueryParams
   ): Observable<any> {
-    return this._crud.put(id, body, this.ROUTE, params);
+    return this._crud.put(null, body, this.ROUTE, params);
   }
 
   deleteOrder(id: string, params?: QueryParams): Observable<any> {
@@ -66,5 +65,12 @@ export class OrdersService {
       sort: sort,
       order: order,
     });
+  }
+
+  getOrdersByUserId(
+    id: string,
+    params?: QueryParams
+  ): Observable<Array<OrderDTO>> {
+    return this._crud.get(id, this.ROUTE + '/user', params);
   }
 }

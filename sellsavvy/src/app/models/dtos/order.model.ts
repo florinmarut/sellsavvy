@@ -22,13 +22,13 @@ export interface OrderUpdateDTO {
   status: OrderStatus;
   price: number;
   buyerId: string;
-  buyer: UserDTO;
+  buyer?: UserDTO;
   sellerId: string;
-  seller: UserDTO;
+  seller?: UserDTO;
   addressId: string;
-  address: AddressDTO;
+  address?: AddressDTO;
   productId: string;
-  product: ProductDTO;
+  product?: ProductDTO;
 }
 
 export interface OrderDTO {
