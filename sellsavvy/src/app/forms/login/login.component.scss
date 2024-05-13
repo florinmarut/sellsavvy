@@ -2,11 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
-  padding: 30px;
-  margin: 40px auto;
+  width: 90%; // Use percentage for better responsiveness
+  max-width: 400px; // Maintain a maximum width for larger screens
+  padding: 20px;
+  margin: 20px auto; // Adjust margins for smaller screens
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: 667px) {
+    // For your mobile screen size
+    width: 95%; // Take almost full width on mobile
+    padding: 15px;
+  }
 
   mat-form-field {
     width: 100%;
@@ -15,7 +22,7 @@
 
   button[mat-raised-button] {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   .button--disabled {
