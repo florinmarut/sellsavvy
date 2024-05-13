@@ -1,0 +1,37 @@
+/* paged-table.component.scss */
+
+.search-container {
+  // Existing styles for flexbox and responsiveness
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+
+  // Styles for the card appearance
+  background-color: white; // Card background
+  border-radius: 8px; // Round corners
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add subtle shadow (optional)
+
+  @media (max-width: 667px) {
+    max-width: 90%;
+  }
+  @media (min-width: 668px) {
+    max-width: 30%;
+    margin: 0 auto;
+  }
+
+  // Styles for the search input field (optional)
+  .search-field {
+    width: 100%;
+    max-width: 400px;
+
+    @media (max-width: 667px) {
+      max-width: 90%;
+    }
+
+    input[matInput] {
+      // Customize input appearance if needed (e.g., padding, font size)
+    }
+  }
+}
+
+// (Your existing mat-grid-list styles)

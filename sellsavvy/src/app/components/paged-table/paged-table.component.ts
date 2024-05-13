@@ -5,11 +5,13 @@ import { ProductDTO } from '../../models/dtos/product.model';
 import { UserDTO } from '../../models/dtos/user.model';
 import { Subject, takeUntil } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'paged-table',
   standalone: true,
-  imports: [MatGridListModule, ProductCardComponent],
+  imports: [MatGridListModule, ProductCardComponent, MatFormFieldModule, MatInputModule],
   templateUrl: './paged-table.component.html',
   styleUrl: './paged-table.component.scss',
 })
