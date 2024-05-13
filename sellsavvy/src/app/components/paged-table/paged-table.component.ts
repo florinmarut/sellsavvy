@@ -7,11 +7,20 @@ import { Subject, takeUntil } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'paged-table',
   standalone: true,
-  imports: [MatGridListModule, ProductCardComponent, MatFormFieldModule, MatInputModule],
+  imports: [
+    MatGridListModule,
+    ProductCardComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './paged-table.component.html',
   styleUrl: './paged-table.component.scss',
 })
