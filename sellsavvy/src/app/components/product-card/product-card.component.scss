@@ -1,29 +1,52 @@
 .product-card {
-  width: 250px;
-  margin: 15px;
+  width: 90vw;      // Responsive width (90% of viewport width)
+  max-width: 400px; // Limit maximum width for larger screens
+  margin: 20px auto; // Center horizontally
+  padding: 20px;     // Add padding within the card
+  border-radius: 8px; // Rounded corners
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow
 
-  .product-card-button {
-    width: 100%;
+  img[mat-card-image] {
+    max-width: 100%; 
+    height: auto;  
+    margin-bottom: 15px;
   }
-}
 
-.product-card-price {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 10px;
-}
-
-mat-card-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  mat-card-title {
-    margin: 10px;
+  h2 {
+    font-size: 1.2rem; // Adjust for mobile
+    margin-bottom: 10px;
   }
-}
 
-mat-card-content {
-  display: flex;
-  justify-content: center;
+  span {
+    font-size: 1rem; // Adjust for mobile
+    display: block;  // Ensure the price occupies the full line
+    margin-bottom: 15px;
+  }
+
+  .button-container {
+    display: flex; // Use Flexbox for button arrangement
+    gap: 10px;     // Space between buttons 
+    flex-wrap: wrap; // Allow buttons to wrap to next line
+
+    button {
+      flex-grow: 1;  // Make buttons expand to fill space
+    }
+  }
+
+  // Media Query for larger screens (adjust as needed)
+  @media (min-width: 768px) {
+    width: 400px;   // Use fixed width on larger screens
+    
+    h2 {
+      font-size: 1.5rem; // Larger font for title
+    }
+
+    span {
+      font-size: 1.2rem; // Larger font for price
+    }
+
+    button {
+      flex-grow: 0;  // Don't expand buttons on larger screens
+    }
+  }
 }
