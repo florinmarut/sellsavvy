@@ -13,7 +13,16 @@ import { MENU_ITEMS, MENU_ITEMS_GUEST } from '../../../models/constants.const';
 import { MenuItem } from '../../../models/navigation.model';
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { Subject } from 'rxjs';
+import {
+  Subject,
+  catchError,
+  map,
+  of,
+  switchMap,
+  takeUntil,
+  throwError,
+} from 'rxjs';
+import { UserDTO } from '../../../models/dtos/user.model';
 
 @Component({
   selector: 'custom-sidenav',
@@ -30,6 +39,7 @@ import { Subject } from 'rxjs';
 })
 export class CustomSidenavComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
+  user: UserDTO | null | undefined;
 
   constructor(private readonly _authService: AuthenticationService) {}
 
@@ -41,12 +51,29 @@ export class CustomSidenavComponent implements OnInit, OnDestroy {
   profilePicSize = computed(() => (this.sidenavCollapsed() ? '32' : '100'));
 
   ngOnInit(): void {
-    this._authService.isLoggedIn.subscribe({
-      next: (isAuthenticated) => {
-        this.menuItems.set(isAuthenticated ? MENU_ITEMS : MENU_ITEMS_GUEST);
-      },
-      error: (err) => console.error(err),
-    });
+    this._authService.isLoggedIn
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((err) => throwError(() => err)),
+        map((isUserLoggedIn) => isUserLoggedIn),
+        switchMap((isUserLoggedIn) =>
+          isUserLoggedIn ? this._authService.getProfile() : of(null)
+        )
+      )
+      .subscribe({
+        next: (user: UserDTO | null) => {
+          let ITEMS: MenuItem[] = [];
+          this.user = user;
+          if (user) {
+            ITEMS = MENU_ITEMS;
+          } else {
+            ITEMS = MENU_ITEMS_GUEST;
+          }
+
+          this.menuItems.set(ITEMS);
+        },
+        error: (err) => console.error(err),
+      });
   }
 
   ngOnDestroy(): void {

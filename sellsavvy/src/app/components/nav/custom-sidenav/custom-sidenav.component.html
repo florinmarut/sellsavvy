@@ -1,4 +1,5 @@
 <div class="sidenav-header">
+  @if (user) {
   <img
     [width]="profilePicSize()"
     [height]="profilePicSize()"
@@ -7,8 +8,9 @@
     alt="profile picture"
   />
   <div class="header-text" [class.hide-header-text]="sidenavCollapsed()">
-    <h2>Name</h2>
+    <h2>{{ user.firstName }} {{ user.lastName }}</h2>
   </div>
+  }
 </div>
 
 <mat-nav-list>
