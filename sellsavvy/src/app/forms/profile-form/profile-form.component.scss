@@ -1,0 +1,33 @@
+/* General styles for the form */
+.update-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* Full width mat-form-field */
+.full-width {
+  width: 100%;
+}
+
+/* Styles for the submit button */
+.submit-button {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 667px) {
+  .update-form {
+    padding: 0.5rem;
+  }
+
+  .submit-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}

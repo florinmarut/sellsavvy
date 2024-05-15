@@ -10,6 +10,7 @@
     "reviews": "reviews",
     "users": "users",
     "login": "login",
+    "logout": "users/logout",
     "register": "register"
   }
 }

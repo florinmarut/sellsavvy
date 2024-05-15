@@ -39,6 +39,21 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       });
   }
 
+  logout() {
+    this.authService
+      .logout()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (value) => {
+          this._router.navigate(['success']);
+        },
+        error: (err) => {
+          console.error(err);
+          this._router.navigate(['fail']);
+        },
+      });
+  }
+
   openEditForm() {
     this._router.navigate(['update-profile']);
   }

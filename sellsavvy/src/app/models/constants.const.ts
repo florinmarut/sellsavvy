@@ -56,6 +56,19 @@ export const MENU_ITEMS: MenuItem[] = [
   },
 ];
 
+export const MENU_ITEMS_GUEST: MenuItem[] = [
+  {
+    label: 'Shop',
+    icon: 'store',
+    route: 'shop',
+  },
+  {
+    label: 'Login',
+    icon: 'login',
+    route: 'login',
+  },
+]
+
 export const COUNTRIES = [
   {
     label: 'Romania',

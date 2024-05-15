@@ -36,16 +36,22 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
     private readonly _router: Router
   ) {}
   ngOnInit(): void {
-    this._authService
-      .getProfile()
+    let fetchProfileAndProducts$ = this._authService.getProfile().pipe(
+      takeUntil(this.destroy$),
+      catchError((err) => throwError(() => err)),
+      map((user: UserDTO) => {
+        this.user = user;
+        return user;
+      }),
+      switchMap((user: UserDTO) => this.fetchproducts(user))
+    );
+
+    this._authService.isLoggedIn
       .pipe(
-        takeUntil(this.destroy$),
-        catchError((err) => throwError(() => err)),
-        map((user: UserDTO) => {
-          this.user = user;
-          return user;
-        }),
-        switchMap((user: UserDTO) => this.fetchproducts(user))
+        map((isUserLoggedIn) => isUserLoggedIn),
+        switchMap((isUserLoggedIn) =>
+          isUserLoggedIn ? fetchProfileAndProducts$ : this.fetchproducts(null)
+        )
       )
       .subscribe({
         next: (pagedproducts) => {
@@ -54,10 +60,10 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
         error: (err) => console.error(err),
       });
   }
-  fetchproducts(user: UserDTO): Observable<PagedData<ProductDTO>> {
+  fetchproducts(user: UserDTO | null): Observable<PagedData<ProductDTO>> {
     if (this._router.url === '/my-products') {
       this.canEdit = true;
-      return this._productsService.getPaged(1, 5, `SellerId == "${user.id}"`);
+      return this._productsService.getPaged(1, 5, `SellerId == "${user?.id}"`);
     }
     return this._productsService.getPaged(1, 5);
   }

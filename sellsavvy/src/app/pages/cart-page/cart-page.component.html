@@ -1,9 +1,11 @@
-@for(cartItem of cartItems; track cartItem){
-<cart-item [item]="cartItem" (remove)="removeCartItem($event)"></cart-item>
-}
+<div class="cart-items">
+  @for(cartItem of cartItems; track cartItem){
+  <cart-item [item]="cartItem" (remove)="removeCartItem($event)"></cart-item>
+  }
+</div>
 
-<form #addressForm="ngForm" (ngSubmit)="submitOrder()">
-  <select name="address" [(ngModel)]="selectedAddressId">
+<form #addressForm="ngForm" (ngSubmit)="submitOrder()" class="address-form">
+  <select name="address" [(ngModel)]="selectedAddressId" class="address-select">
     @for(address of addresses; track address){
     <option [value]="address.id">
       {{ countries.get(address.country) }}, {{ states.get(address.state) }},
@@ -12,5 +14,5 @@
     }
   </select>
 
-  <button mat-raised-button color="primary" type="submit">Place order</button>
+  <button mat-raised-button color="primary" type="submit" class="submit-button">Place order</button>
 </form>

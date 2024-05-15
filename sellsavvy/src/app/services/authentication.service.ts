@@ -27,6 +27,10 @@ export class AuthenticationService {
   private readonly _user$ = new BehaviorSubject<UserDTO | null | undefined>(
     undefined
   );
+  private readonly _logout$ = new Observable((subscriber) => {
+    this._storage.removeFromLocalStorage(ACCESS_TOKEN);
+    subscriber.next(true);
+  });
 
   get isLoggedIn() {
     return this._loggedIn$.asObservable();
@@ -62,6 +66,13 @@ export class AuthenticationService {
           );
         })
       );
+  }
+
+  logout(): Observable<any> {
+    return this._logout$.pipe(
+      catchError((err) => throwError(() => err)),
+      map(() => this._loggedIn$.next(false))
+    );
   }
 
   register(user: any): Observable<any> {
