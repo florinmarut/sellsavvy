@@ -13,6 +13,7 @@ import { ProfileFormComponent } from './forms/profile-form/profile-form.componen
 import { AddressFormComponent } from './forms/address-form/address-form.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
+import { SellingPageComponent } from './pages/selling-page/selling-page.component';
 
 export const routes: Routes = [
   {
@@ -86,6 +87,10 @@ export const routes: Routes = [
   {
     path: 'cart',
     component: CartPageComponent,
+  },
+  {
+    path: 'sell',
+    component: SellingPageComponent,
   },
   {
     path: '**',
