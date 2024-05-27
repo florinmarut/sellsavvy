@@ -1,1 +1,27 @@
-<p>sold-item works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title
+      >{{ value.id }} - {{ statuses.get(value.status) }}</mat-card-title
+    >
+  </mat-card-header>
+  <mat-card-content>
+    {{ value.product.title }}
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="viewProduct()">
+      View product
+    </button>
+    <mat-form-field>
+      <mat-label>Select a status</mat-label>
+      <mat-select [(value)]="value.status">
+        @for (status of statuses.keys(); track status) {
+        <mat-option [value]="status">{{ statuses.get(status) }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="changeStatus()">
+      Update status
+    </button>
+  </mat-card-actions>
+</mat-card>

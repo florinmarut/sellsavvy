@@ -1,1 +1,3 @@
-<p>selling-page works!</p>
+@for(order of orders; track orders) {
+<sold-item [value]="order" (status)="updateOrder($event)"></sold-item>
+}

@@ -12,13 +12,14 @@ import {
 } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication.service';
 import { OrdersService } from '../../services/apis/orders.service';
+import { SoldItemComponent } from "../../components/sold-item/sold-item.component";
 
 @Component({
-  selector: 'app-selling-page',
-  standalone: true,
-  imports: [],
-  templateUrl: './selling-page.component.html',
-  styleUrl: './selling-page.component.scss',
+    selector: 'app-selling-page',
+    standalone: true,
+    templateUrl: './selling-page.component.html',
+    styleUrl: './selling-page.component.scss',
+    imports: [SoldItemComponent]
 })
 export class SellingPageComponent implements OnInit, OnDestroy {
   orders!: OrderDTO[];
