@@ -23,5 +23,6 @@
   <button mat-raised-button color="primary" type="submit" class="submit-button">
     Update
   </button>
+  <file-picker [maxFiles]="1" fileFilter=".png" (filesSelected)="onFilesSelected($event)"></file-picker>
 </form>
 }

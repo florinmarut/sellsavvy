@@ -32,8 +32,18 @@ export class UsersService {
     return this._crud.post(null, body, this.ROUTE, params);
   }
 
-  updateUser(body: UserUpdateDTO, params?: QueryParams): Observable<any> {
-    return this._crud.put(null, body, this.ROUTE, params);
+  updateUser(
+    body: UserUpdateDTO,
+    files: File[],
+    params?: QueryParams
+  ): Observable<any> {
+    const formData: FormData = new FormData();
+    files.forEach((file) => {
+      formData.append('image', file);
+    });
+
+    formData.append('user', JSON.stringify(body));
+    return this._crud.put(null, formData, this.ROUTE, params);
   }
 
   deleteUser(id: string, params?: QueryParams): Observable<any> {

@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CustomSidenavComponent } from '../custom-sidenav/custom-sidenav.component';
-import { SingleFileUploadComponent } from "../../single-file-upload/single-file-upload.component";
 
 @Component({
     selector: 'navigation',
@@ -20,8 +19,7 @@ import { SingleFileUploadComponent } from "../../single-file-upload/single-file-
         MatButtonModule,
         MatIconModule,
         MatSidenavModule,
-        CustomSidenavComponent,
-        SingleFileUploadComponent
+        CustomSidenavComponent
     ]
 })
 export class NavigationComponent {

@@ -43,6 +43,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   isFormSubmittedWithErrors = false;
   isLoading = false;
   isFormInEditMode = false;
+  files: File[] = [];
 
   private _productId!: string;
 
@@ -114,7 +115,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         }),
         switchMap((value) => {
           if (!this.isFormInEditMode) {
-            return this._productsService.createproduct(value).pipe(
+            return this._productsService.createproduct(value, this.files).pipe(
               map((productValue) => {
                 this.isLoading = false;
                 this.isFormSubmittedWithErrors = false;
@@ -128,7 +129,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
               })
             );
           } else {
-            return this._productsService.updateproduct(value).pipe(
+            return this._productsService.updateproduct(value, this.files).pipe(
               map((productValue) => {
                 this.isLoading = false;
                 this.isFormSubmittedWithErrors = false;
@@ -148,6 +149,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   onFilesSelected(files: File[]) {
+    this.files = files;
   }
 
   ngOnDestroy(): void {

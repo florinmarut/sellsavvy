@@ -29,20 +29,48 @@ export class productsService {
     return this._crud.get(id, this.ROUTE, params);
   }
 
-  createproduct(body: ProductCreateDTO, params?: QueryParams): Observable<any> {
-    return this._crud.post(null, body, this.ROUTE, params);
+  createproduct(
+    body: ProductCreateDTO,
+    files: File[],
+    params?: QueryParams
+  ): Observable<any> {
+    const formData: FormData = new FormData();
+
+    formData.append('product', JSON.stringify(body));
+
+    files.forEach((file) => {
+      formData.append('images', file);
+    });
+
+    return this._crud.post(null, formData, this.ROUTE, params);
   }
 
   updateproduct(
     body: ProductUpdateDTO,
+    files: File[],
     id?: string,
     params?: QueryParams
   ): Observable<any> {
-    return this._crud.put(id, body, this.ROUTE, params);
+    const formData: FormData = new FormData();
+    formData.append('product', JSON.stringify(body));
+
+    files.forEach((file) => {
+      formData.append('images', file);
+    });
+    return this._crud.put(id, formData, this.ROUTE, params);
   }
 
   deleteproduct(id: string, params?: QueryParams): Observable<any> {
     return this._crud.delete(id, this.ROUTE, params);
+  }
+
+  uploadImages(productId: string, images: File[]) {
+    const formData: FormData = new FormData();
+    images.forEach((image) => {
+      formData.append('Images', image, image.name);
+    });
+
+    return this._crud.post(productId, formData, `${this.ROUTE}/images`);
   }
 
   getPaged(

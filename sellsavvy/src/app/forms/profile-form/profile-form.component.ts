@@ -22,10 +22,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsersService } from '../../services/apis/users.service';
+import { FilePickerComponent } from '../../components/file-picker/file-picker.component';
 
 @Component({
   selector: 'app-profile-form',
   standalone: true,
+  templateUrl: './profile-form.component.html',
+  styleUrl: './profile-form.component.scss',
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -33,13 +36,13 @@ import { UsersService } from '../../services/apis/users.service';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
+    FilePickerComponent,
   ],
-  templateUrl: './profile-form.component.html',
-  styleUrl: './profile-form.component.scss',
 })
 export class ProfileFormComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   form: FormGroup | undefined;
+  files: File[] = [];
 
   constructor(
     private readonly _authService: AuthenticationService,
@@ -82,7 +85,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   onSubmit() {
     const user = this.form?.value;
     this._userService
-      .updateUser(user)
+      .updateUser(user, this.files)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (value) => {
@@ -93,6 +96,10 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           this._router.navigate(['fail']);
         },
       });
+  }
+
+  onFilesSelected(files: File[]) {
+    this.files = files;
   }
 
   ngOnDestroy(): void {
