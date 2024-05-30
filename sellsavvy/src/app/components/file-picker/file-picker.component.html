@@ -1,0 +1,14 @@
+<div class="file-picker">
+  <input
+    type="file"
+    [attr.multiple]="maxFiles > 1 ? true : null"
+    (change)="onFileChange($event)"
+    [attr.accept]="fileFilter"
+  />
+  <div class="selected-files">
+    <div class="file-item" *ngFor="let file of selectedFiles; let i = index">
+      <span>{{ file.name }}</span>
+      <button type="button" (click)="removeFile(i)">Remove</button>
+    </div>
+  </div>
+</div>

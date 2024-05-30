@@ -16,10 +16,13 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Subscription, catchError, map, switchMap, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDTO } from '../../models/dtos/product.model';
+import { FilePickerComponent } from '../../components/file-picker/file-picker.component';
 
 @Component({
   selector: 'product-form',
   standalone: true,
+  templateUrl: './product-form.component.html',
+  styleUrl: './product-form.component.scss',
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -31,9 +34,8 @@ import { ProductDTO } from '../../models/dtos/product.model';
     SuccessCardComponent,
     FailCardComponent,
     MatProgressSpinnerModule,
+    FilePickerComponent,
   ],
-  templateUrl: './product-form.component.html',
-  styleUrl: './product-form.component.scss',
 })
 export class ProductFormComponent implements OnInit, OnDestroy {
   productForm!: FormGroup;
@@ -143,6 +145,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+  }
+
+  onFilesSelected(files: File[]) {
   }
 
   ngOnDestroy(): void {

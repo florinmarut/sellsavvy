@@ -37,6 +37,8 @@
       <input matInput type="number" formControlName="stock" />
     </mat-form-field>
 
+    <file-picker [maxFiles]="2" fileFilter=".png" (filesSelected)="onFilesSelected($event)"></file-picker>
+
     <button
       mat-raised-button
       color="primary"

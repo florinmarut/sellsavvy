@@ -1,0 +1,58 @@
+.file-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.file-picker input[type="file"] {
+  padding: 10px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.file-picker .selected-files {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.file-picker .file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.file-picker .file-item button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.file-picker .file-item button:hover {
+  background-color: #c82333;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  .file-picker input[type="file"] {
+    width: 100%;
+  }
+
+  .file-picker .file-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .file-picker .file-item button {
+    margin-top: 5px;
+    align-self: flex-end;
+  }
+}
