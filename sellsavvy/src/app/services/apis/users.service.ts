@@ -49,4 +49,20 @@ export class UsersService {
   deleteUser(id: string, params?: QueryParams): Observable<any> {
     return this._crud.delete(id, this.ROUTE, params);
   }
+
+  followUser(params: { followeeId: string; followerId: string }): Observable<any> {
+    return this._crud.post(null, `${this.ROUTE}/follow`, params);
+  }
+
+  unfollowUser(params: { followeeId: string; followerId: string }): Observable<any> {
+    return this._crud.post(null, `${this.ROUTE}/unfollow`, params);
+  }
+
+  getFollowers(params: { followeeId: string; }): Observable<any> {
+    return this._crud.post(null, `${this.ROUTE}/followers`, params);
+  }
+
+  getFollowees(params: { followerId: string }): Observable<any> {
+    return this._crud.post(null, `${this.ROUTE}/followees`, params);
+  }
 }
