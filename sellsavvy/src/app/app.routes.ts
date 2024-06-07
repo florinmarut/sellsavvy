@@ -14,6 +14,7 @@ import { AddressFormComponent } from './forms/address-form/address-form.componen
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { SellingPageComponent } from './pages/selling-page/selling-page.component';
+import { FollowersPageComponent } from './pages/followers-page/followers-page.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,11 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
+    canActivate: [authorizationGuard],
+  },
+  {
+    path: 'followers',
+    component: FollowersPageComponent,
     canActivate: [authorizationGuard],
   },
   {

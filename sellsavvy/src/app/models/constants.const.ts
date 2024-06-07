@@ -30,6 +30,11 @@ export const MENU_ITEMS: MenuItem[] = [
     route: 'profile',
   },
   {
+    label: 'Followers',
+    icon: 'groups',
+    route: 'followers'
+  },
+  {
     label: 'Shop',
     icon: 'store',
     route: 'shop',
