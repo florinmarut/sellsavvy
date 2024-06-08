@@ -24,13 +24,11 @@ export class FollowersComponent implements OnInit {
       profilePicture: 'https://via.placeholder.com/150',
       name: 'John Doe',
       postedProducts: 10,
-      isFollowing: false,
     },
     {
       profilePicture: 'https://via.placeholder.com/150',
       name: 'Jane Smith',
       postedProducts: 8,
-      isFollowing: true,
     },
     // Add more sample followers as needed
   ];

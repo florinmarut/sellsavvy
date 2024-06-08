@@ -59,10 +59,10 @@ export class UsersService {
   }
 
   getFollowers(params: { followeeId: string; }): Observable<any> {
-    return this._crud.post(null, `${this.ROUTE}/followers`, params);
+    return this._crud.get(null, `${this.ROUTE}/followers`, params);
   }
 
   getFollowees(params: { followerId: string }): Observable<any> {
-    return this._crud.post(null, `${this.ROUTE}/followees`, params);
+    return this._crud.get(null, `${this.ROUTE}/followees`, params);
   }
 }

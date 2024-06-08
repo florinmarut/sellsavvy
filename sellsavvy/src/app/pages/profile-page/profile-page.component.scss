@@ -1,17 +1,67 @@
 .user-info-container {
   display: flex;
-  flex-direction: column; // Arrange items vertically
-  align-items: center; // Center horizontally
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
 
-  .user-header {
-    display: flex; // For image and name side-by-side
-    align-items: center; // Vertical center for image
-    gap: 10px; // Spacing between image and name
-    margin-bottom: 15px;
+.user-info-container img {
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.user-info-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.contact-info {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+button {
+  margin: 10px 0;
+  width: 100%;
+}
+
+address-list {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .user-info-container {
+    padding: 40px;
+  }
+
+  .user-info-container img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+  }
+
+  .user-info-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .contact-info {
+    text-align: left;
+    margin-bottom: 30px;
   }
 
   button {
-    margin-top: 15px;
+    width: auto;
+    flex: 0 0 auto;
   }
 }

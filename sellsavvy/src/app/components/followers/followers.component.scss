@@ -1,6 +1,7 @@
 /* src/app/followers/followers.component.css */
 .follower-card {
-  margin: 10px 0;
+  margin: 10px auto;
+  width: 50%;
 }
 
 .profile-picture {
@@ -8,11 +9,6 @@
   height: 40px;
   border-radius: 50%;
   background-size: cover;
-}
-
-mat-card-actions {
-  display: flex;
-  justify-content: flex-end;
 }
 
 @media (max-width: 600px) {

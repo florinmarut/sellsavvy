@@ -1,52 +1,102 @@
-.product-card {
-  width: 90vw;      // Responsive width (90% of viewport width)
-  max-width: 400px; // Limit maximum width for larger screens
-  margin: 20px auto; // Center horizontally
-  padding: 20px;     // Add padding within the card
-  border-radius: 8px; // Rounded corners
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow
+// .product-card {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 20px;
+//   background-color: #fff;
+//   border-radius: 10px;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+//   transition: transform 0.3s;
+//   margin: 10px;
+//   width: 350px;
+//   height: 400px;
+// }
 
-  img[mat-card-image] {
-    max-width: 100%; 
-    height: auto;  
-    margin-bottom: 15px;
-  }
+// .product-card:hover {
+//   transform: translateY(-5px);
+// }
 
-  h2 {
-    font-size: 1.2rem; // Adjust for mobile
-    margin-bottom: 10px;
-  }
+// .product-card h2 {
+//   font-size: 1.5rem;
+//   margin-bottom: 10px;
+//   text-align: center;
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// }
 
-  span {
-    font-size: 1rem; // Adjust for mobile
-    display: block;  // Ensure the price occupies the full line
-    margin-bottom: 15px;
-  }
+// .product-card img {
+//   width: 100%;
+//   height: auto;
+//   border-radius: 10px;
+//   margin-bottom: 10px;
+//   display: block; /* Ensure the image is displayed as a block element */
+// }
 
-  .button-container {
-    display: flex; // Use Flexbox for button arrangement
-    gap: 10px;     // Space between buttons 
-    flex-wrap: wrap; // Allow buttons to wrap to next line
+// .product-card .description {
+//   font-size: 1rem;
+//   text-align: center;
+//   margin-bottom: 10px;
+//   height: 60px; /* Adjust based on your needs */
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   display: -webkit-box;
+//   -webkit-line-clamp: 3; /* Number of lines to show */
+//   -webkit-box-orient: vertical;
+// }
 
-    button {
-      flex-grow: 1;  // Make buttons expand to fill space
-    }
-  }
+// .product-card .price {
+//   font-size: 1.25rem;
+//   font-weight: bold;
+//   margin: 10px 0;
+// }
 
-  // Media Query for larger screens (adjust as needed)
-  @media (min-width: 768px) {
-    width: 400px;   // Use fixed width on larger screens
-    
-    h2 {
-      font-size: 1.5rem; // Larger font for title
-    }
+// .button-container {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   gap: 10px;
+//   width: 100%;
+//   margin: 10px;
+// }
 
-    span {
-      font-size: 1.2rem; // Larger font for price
-    }
+// .button-container button {
+//   flex: 1 1 auto;
+//   min-width: 100px;
+//   margin: 5px;
+// }
 
-    button {
-      flex-grow: 0;  // Don't expand buttons on larger screens
-    }
-  }
-}
+// @media (min-width: 768px) {
+//   .product-card {
+//     padding: 30px;
+//   }
+
+//   .product-card h2 {
+//     font-size: 1.75rem;
+//   }
+
+//   .product-card img {
+//     width: 200px;
+//     height: 150px;
+//     margin: 0 auto 20px; /* Center the image horizontally */
+//   }
+
+//   .product-card .description {
+//     font-size: 1.125rem;
+//     height: auto; /* Adjust based on your needs */
+//   }
+
+//   .product-card .price {
+//     font-size: 1.5rem;
+//   }
+
+//   .button-container {
+//     justify-content: space-around;
+//   }
+
+//   .button-container button {
+//     flex: 0 0 auto;
+//     margin: 0 5px;
+//   }
+// }

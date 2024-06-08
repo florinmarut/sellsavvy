@@ -1,38 +1,36 @@
-@if (isLoading) {
-<div class="spinner-container">
+<div *ngIf="isLoading" class="spinner-container">
   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
-} @else if(isFormSubmitted) {
-<success-card
-  [title]="'product posted!'"
-  [message]="'Your product have been successfully posted to SellSavvy!'"
-></success-card
->} @else if(isFormSubmittedWithErrors) {
-<fail-card
-  [title]="'Fail!'"
-  [message]="
-    'An error occurred trying to post your product! Please try again later!'
-  "
-></fail-card>
-} @else {
-<div class="form-container">
+<div *ngIf="isFormSubmitted" class="message-container">
+  <success-card
+    [title]="'Product Posted!'"
+    [message]="'Your product has been successfully posted to SellSavvy!'"
+  ></success-card>
+</div>
+<div *ngIf="isFormSubmittedWithErrors" class="message-container">
+  <fail-card
+    [title]="'Fail!'"
+    [message]="'An error occurred trying to post your product! Please try again later!'"
+  ></fail-card>
+</div>
+<div *ngIf="!isLoading && !isFormSubmitted && !isFormSubmittedWithErrors" class="form-container">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="form">
-    <mat-form-field>
+    <mat-form-field class="full-width">
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="full-width">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="half-width">
       <mat-label>Price</mat-label>
       <input matInput type="number" formControlName="price" />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="half-width">
       <mat-label>Stock</mat-label>
       <input matInput type="number" formControlName="stock" />
     </mat-form-field>
@@ -44,10 +42,9 @@
       color="primary"
       type="submit"
       [disabled]="!productForm.valid"
-      [class.button--disabled]="productForm.invalid"
+      class="submit-button"
     >
       Submit
     </button>
   </form>
 </div>
-}

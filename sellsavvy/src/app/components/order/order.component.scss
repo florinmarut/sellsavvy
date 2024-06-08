@@ -1,0 +1,46 @@
+/* CSS for Order Component */
+mat-card {
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+mat-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+mat-card-header {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  border-radius: 10px 10px 0 0;
+}
+
+mat-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+mat-card-content {
+  padding: 20px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 10px 10px;
+}
+
+mat-card-actions button {
+  margin-left: 10px;
+}
+
+@media (min-width: 768px) {
+  mat-card {
+    max-width: 600px;
+  }
+}

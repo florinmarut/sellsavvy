@@ -16,11 +16,12 @@ import { ProductDTO } from '../../models/dtos/product.model';
 import { PagedData } from '../../models/dtos/paged.model';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'products-page',
   standalone: true,
-  imports: [PagedTableComponent, MatButtonModule],
+  imports: [PagedTableComponent, MatButtonModule, MatIconModule],
   templateUrl: './products-page.component.html',
   styleUrl: './products-page.component.scss',
 })

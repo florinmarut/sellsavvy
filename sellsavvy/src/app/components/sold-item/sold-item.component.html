@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="order-card">
   <mat-card-header>
     <mat-card-title
       >{{ value.id }} - {{ statuses.get(value.status) }}</mat-card-title
@@ -8,11 +8,11 @@
     {{ value.product.title }}
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions class="vertical-actions">
     <button mat-raised-button color="primary" (click)="viewProduct()">
       View product
     </button>
-    <mat-form-field>
+    <mat-form-field appearance="fill" class="status-field">
       <mat-label>Select a status</mat-label>
       <mat-select [(value)]="value.status">
         @for (status of statuses.keys(); track status) {

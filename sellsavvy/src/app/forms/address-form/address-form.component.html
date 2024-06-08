@@ -1,34 +1,39 @@
-@if (form) {
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <mat-label> City </mat-label>
+<form
+  *ngIf="form"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="responsive-form"
+>
+  <mat-form-field class="full-width">
+    <mat-label>City</mat-label>
     <input type="text" matInput formControlName="city" />
   </mat-form-field>
-  <mat-form-field>
-    <mat-label> Country </mat-label>
-    <mat-select formControlName="country"
-      >@for(country of countries; track country) {
-      <mat-option [value]="country.value">{{ country.label }}</mat-option>
-      }</mat-select
-    >
+  <mat-form-field class="full-width">
+    <mat-label>Country</mat-label>
+    <mat-select formControlName="country">
+      <mat-option *ngFor="let country of countries" [value]="country.value">
+        {{ country.label }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <mat-form-field>
-    <mat-label> State </mat-label>
-    <mat-select formControlName="state"
-      >@for(state of states; track state) {
-      <mat-option [value]="state.value">{{ state.label }}</mat-option>
-      }</mat-select
-    >
+  <mat-form-field class="full-width">
+    <mat-label>State</mat-label>
+    <mat-select formControlName="state">
+      <mat-option *ngFor="let state of states" [value]="state.value">
+        {{ state.label }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <mat-form-field>
-    <mat-label> Street </mat-label>
+  <mat-form-field class="full-width">
+    <mat-label>Street</mat-label>
     <input type="text" matInput formControlName="street" />
   </mat-form-field>
-  <mat-form-field>
-    <mat-label> ZIP </mat-label>
+  <mat-form-field class="full-width">
+    <mat-label>ZIP</mat-label>
     <input type="text" matInput formControlName="zip" />
   </mat-form-field>
 
-  <button mat-raised-button type="submit" color="primary">Submit</button>
+  <button mat-raised-button type="submit" color="primary" class="submit-button">
+    Submit
+  </button>
 </form>
-}

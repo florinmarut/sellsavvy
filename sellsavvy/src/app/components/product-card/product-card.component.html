@@ -1,23 +1,27 @@
 <mat-card class="product-card">
-  <mat-card-content> 
-    <h2>{{ product.title }}</h2>
-    <img mat-card-image src="https://picsum.photos/id/1005/200/150" alt="Product Photo" />
-    <span>{{ product.price }} RON</span>
+  <mat-card-content>
+    <h2>{{ product.title | truncate : 20 }}</h2>
+    <img
+      mat-card-image
+      src="https://picsum.photos/id/1005/200/150"
+      alt="Product Photo"
+    />
+    <p class="description">{{ product.description | truncate : 50 }}</p>
+    <span class="price">{{ product.price }} RON</span>
     <div class="button-container">
-        @if (!canEdit) {
-        <button mat-raised-button color="primary" (click)="addToCart()">
-            Add to Cart
-        </button>
-        } @else {
-        <button mat-raised-button color="primary" (click)="editproduct()">
-            Edit
-        </button>
-        <button mat-raised-button color="primary" (click)="deleteproduct()">
-            Delete
-        </button>
-        }
-        <button mat-button color="primary" (click)="viewProduct()">View</button>
+      @if (!canEdit) {
+      <button mat-raised-button color="primary" (click)="addToCart()">
+        Add to Cart
+      </button>
+      } @else {
+      <button mat-raised-button color="primary" (click)="editProduct()">
+        Edit
+      </button>
+      <button mat-raised-button color="primary" (click)="deleteProduct()">
+        Delete
+      </button>
+      }
+      <button mat-button color="primary" (click)="viewProduct()">View</button>
     </div>
   </mat-card-content>
 </mat-card>
-

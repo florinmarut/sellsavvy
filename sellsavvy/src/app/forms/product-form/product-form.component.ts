@@ -17,6 +17,7 @@ import { Subscription, catchError, map, switchMap, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDTO } from '../../models/dtos/product.model';
 import { FilePickerComponent } from '../../components/file-picker/file-picker.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'product-form',
@@ -24,6 +25,7 @@ import { FilePickerComponent } from '../../components/file-picker/file-picker.co
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,

@@ -1,37 +1,125 @@
-/* paged-table.component.scss */
-
 .search-container {
-  // Existing styles for flexbox and responsiveness
   display: flex;
+  align-items: center;
+  margin-bottom: 20px;
   justify-content: center;
-  padding: 15px;
-
-  // Styles for the card appearance
-  background-color: white; // Card background
-  border-radius: 8px; // Round corners
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add subtle shadow (optional)
-
-  @media (max-width: 667px) {
-    max-width: 90%;
-  }
-  @media (min-width: 668px) {
-    max-width: 30%;
-    margin: 0 auto;
-  }
-
-  // Styles for the search input field (optional)
-  .search-field {
-    width: 100%;
-    max-width: 400px;
-
-    @media (max-width: 667px) {
-      max-width: 90%;
-    }
-
-    input[matInput] {
-      // Customize input appearance if needed (e.g., padding, font size)
-    }
-  }
 }
 
-// (Your existing mat-grid-list styles)
+.search-field {
+  flex-grow: 1;
+  max-width: 600px;
+  margin-right: 10px; /* Add margin to separate input and button */
+}
+
+.search-button {
+  margin-left: 10px; /* Add margin to separate input and button */
+}
+
+mat-grid-list {
+  width: 100%;
+  margin: 0;
+}
+
+mat-grid-tile {
+  padding: 10px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  margin: 10px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.product-card .description {
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 10px;
+  height: 60px; /* Adjust based on your needs */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.product-card .price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.button-container button {
+  flex: 1 1 auto;
+  min-width: 100px;
+  margin: 5px;
+}
+
+@media (min-width: 768px) {
+  .product-card {
+    padding: 30px;
+  }
+
+  .product-card h2 {
+    font-size: 1.75rem;
+  }
+
+  .product-card img {
+    width: 200px;
+    height: 150px;
+    margin: 0 auto 20px; /* Center the image horizontally */
+  }
+
+  .product-card .description {
+    font-size: 1.125rem;
+    height: auto; /* Adjust based on your needs */
+  }
+
+  .product-card .price {
+    font-size: 1.5rem;
+  }
+
+  .button-container {
+    justify-content: space-around;
+  }
+
+  .button-container button {
+    flex: 0 0 auto;
+    margin: 0 5px;
+  }
+}

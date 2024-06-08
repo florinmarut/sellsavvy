@@ -8,11 +8,12 @@ import { CartItemsService } from '../../services/apis/cart-items.service';
 import { CartItemCreateDTO } from '../../models/dtos/cart-item.model';
 import { UserDTO } from '../../models/dtos/user.model';
 import { productsService } from '../../services/apis/products.service';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 @Component({
   selector: 'product-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, TruncatePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
@@ -43,11 +44,11 @@ export class ProductCardComponent {
     });
   }
 
-  editproduct() {
+  editProduct() {
     this._router.navigate([`update-product/${this.product.id}`]);
   }
 
-  deleteproduct() {
+  deleteProduct() {
     this._productsService.deleteproduct(this.product.id).subscribe({
       next: (value) => {
         this._router.navigate(['success']);
