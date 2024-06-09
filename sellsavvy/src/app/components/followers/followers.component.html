@@ -1,15 +1,21 @@
 <!-- src/app/followers/followers.component.html -->
 <div fxLayout="column" fxLayoutAlign="start stretch">
-  <mat-card *ngFor="let follower of followers" class="follower-card" (click)="viewProfile(follower.id)">
+  <mat-card
+    *ngFor="let follower of followers"
+    class="follower-card"
+    (click)="viewProfile(follower.id)"
+  >
     <mat-card-header>
       <div
         mat-card-avatar
         class="profile-picture"
         [ngStyle]="{
-          'background-image': 'url(' + follower.profilePicture + ')'
+          'background-image': 'url(https://via.placeholder.com/150)'
         }"
       ></div>
-      <mat-card-title>{{ follower.firstName }} {{follower.lastName}}</mat-card-title>
+      <mat-card-title
+        >{{ follower.firstName }} {{ follower.lastName }}</mat-card-title
+      >
     </mat-card-header>
   </mat-card>
 </div>

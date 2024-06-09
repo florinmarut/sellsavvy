@@ -80,7 +80,7 @@ export class UserPageComponent {
       .getFollowers({ followeeId: this.user.id })
       .subscribe((followers: any[]) => {
         this.isFollowing = followers.some(
-          (follower) => follower.id === this.loggedInUserId
+          (follower) => follower.followerId === this.loggedInUserId
         );
       });
   }

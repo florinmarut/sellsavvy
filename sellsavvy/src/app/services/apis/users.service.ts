@@ -50,15 +50,21 @@ export class UsersService {
     return this._crud.delete(id, this.ROUTE, params);
   }
 
-  followUser(params: { followeeId: string; followerId: string }): Observable<any> {
-    return this._crud.post(null, `${this.ROUTE}/follow`, params);
+  followUser(params: {
+    followeeId: string;
+    followerId: string;
+  }): Observable<any> {
+    return this._crud.post(null, null, `${this.ROUTE}/follow`, params);
   }
 
-  unfollowUser(params: { followeeId: string; followerId: string }): Observable<any> {
-    return this._crud.post(null, `${this.ROUTE}/unfollow`, params);
+  unfollowUser(params: {
+    followeeId: string;
+    followerId: string;
+  }): Observable<any> {
+    return this._crud.post(null, null, `${this.ROUTE}/unfollow`, params);
   }
 
-  getFollowers(params: { followeeId: string; }): Observable<any> {
+  getFollowers(params: { followeeId: string }): Observable<any> {
     return this._crud.get(null, `${this.ROUTE}/followers`, params);
   }
 
