@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { forkJoin, switchMap } from 'rxjs';
 import { UsersService } from '../../services/apis/users.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { UserDTO } from '../../models/dtos/user.model';
+import UserFollow from '../../models/dtos/user-follow.model';
 
 @Component({
   selector: 'followers-container',
@@ -24,8 +26,8 @@ import { AuthenticationService } from '../../services/authentication.service';
   ],
 })
 export class FollowersContainerComponent implements OnInit {
-  followingList: Array<any> = [];
-  followersList: Array<any> = [];
+  followingList: Array<UserFollow> = [];
+  followersList: Array<UserFollow> = [];
 
   constructor(
     private usersService: UsersService,
@@ -55,5 +57,13 @@ export class FollowersContainerComponent implements OnInit {
           console.error('Error fetching followers or followees', error);
         }
       );
+  }
+
+  getFollowers(): UserDTO[] {
+    return this.followersList.map((follow) => follow.follower);
+  }
+
+  getFollowees(): UserDTO[] {
+    return this.followingList.map((follow) => follow.followee);
   }
 }

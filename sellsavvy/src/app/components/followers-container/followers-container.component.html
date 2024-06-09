@@ -1,9 +1,8 @@
-<!-- src/app/followers-container/followers-container.component.html -->
 <mat-tab-group>
   <mat-tab label="Following">
-    <followers [followers]="followingList"></followers>
+    <followers [followers]="getFollowees()"></followers>
   </mat-tab>
   <mat-tab label="Followers">
-    <followers [followers]="followersList"></followers>
+    <followers [followers]="getFollowers()"></followers>
   </mat-tab>
 </mat-tab-group>
