@@ -11,6 +11,7 @@ export interface ProductCreateDTO {
   sellerId: string;
   seller: UserDTO;
   reviews: Array<ReviewDTO>;
+  isAvailable: boolean;
 }
 
 export interface ProductUpdateDTO {
@@ -23,6 +24,7 @@ export interface ProductUpdateDTO {
   sellerId: string;
   seller: UserDTO;
   reviews: Array<ReviewDTO>;
+  isAvailable: boolean;
 }
 
 export interface ProductDTO {
@@ -35,4 +37,5 @@ export interface ProductDTO {
   sellerId: string;
   seller: UserDTO;
   reviews: Array<ReviewDTO>;
+  isAvailable: boolean;
 }
