@@ -15,6 +15,7 @@ import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
 import { SellingPageComponent } from './pages/selling-page/selling-page.component';
 import { FollowersPageComponent } from './pages/followers-page/followers-page.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
 
 export const routes: Routes = [
   {
@@ -97,6 +98,10 @@ export const routes: Routes = [
   {
     path: 'sell',
     component: SellingPageComponent,
+  },
+  {
+    path: 'user/:id',
+    component: UserPageComponent,
   },
   {
     path: '**',
