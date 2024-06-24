@@ -35,3 +35,20 @@
   justify-content: center;
   margin-top: 20px; /* Add margin to separate from the table */
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.search-field {
+  flex-grow: 1;
+  max-width: 600px;
+  margin-right: 10px; /* Add margin to separate input and button */
+}
+
+.search-button {
+  margin-left: 10px; /* Add margin to separate input and button */
+}

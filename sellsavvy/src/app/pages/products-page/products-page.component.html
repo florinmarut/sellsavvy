@@ -8,6 +8,22 @@
   >
     Add new product
   </button>
+  } @else {
+  <div class="search-container">
+    <mat-form-field class="search-field">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search products" #searchInput />
+    </mat-form-field>
+
+    <button
+      mat-fab
+      color="primary"
+      class="search-button"
+      (click)="onSearchButtonClick(searchInput.value)"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
   }
   <paged-table
     [loggedInUser]="user"

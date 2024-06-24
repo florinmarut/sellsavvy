@@ -29,7 +29,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     MatButtonModule,
     MatIconModule,
     CommonModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   templateUrl: './paged-table.component.html',
   styleUrl: './paged-table.component.scss',
@@ -53,7 +53,7 @@ export class PagedTableComponent implements OnInit, OnDestroy {
     this.columns = width <= 768 ? 1 : 4;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   trackProduct(index: number, product: ProductDTO): string {
     return product.id;
@@ -70,14 +70,6 @@ export class PagedTableComponent implements OnInit, OnDestroy {
           this.columns = 4;
         }
       });
-  }
-
-  onSearch(): void {
-    // Implement search logic here
-  }
-
-  onSearchButtonClick(): void {
-    // Implement search button click logic here
   }
 
   ngOnDestroy() {

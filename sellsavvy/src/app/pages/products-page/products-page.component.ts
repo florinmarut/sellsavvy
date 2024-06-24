@@ -18,6 +18,8 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'products-page',
@@ -27,6 +29,8 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './products-page.component.html',
   styleUrls: ['./products-page.component.scss'],
@@ -38,6 +42,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
   canEdit: boolean = false;
   pageSize: number = 5;
   pageNumber: number = 1;
+  filters: string | undefined;
 
   constructor(
     private readonly _authService: AuthenticationService,
@@ -88,7 +93,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
         `SellerId == "${user?.id}"`
       );
     }
-    return this._productsService.getPaged(pageNumber, pageSize);
+    return this._productsService.getPaged(pageNumber, pageSize, this.filters);
   }
 
   onPageChange(event: PageEvent) {
@@ -104,6 +109,17 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
 
   addProduct() {
     this._router.navigate(['create-product']);
+  }
+
+  onSearchButtonClick(searchValue: string): void {
+    this.filters = `Title.ToLower().Contains("${searchValue.toLowerCase()}")`;
+    this.pageNumber = 1; // Reset to first page on search
+    this.fetchProducts(this.user, this.pageNumber, this.pageSize).subscribe({
+      next: (pagedproducts) => {
+        this.pagedproducts = pagedproducts;
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   ngOnDestroy(): void {

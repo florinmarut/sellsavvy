@@ -72,6 +72,11 @@ export const MENU_ITEMS_GUEST: MenuItem[] = [
     icon: 'login',
     route: 'login',
   },
+  {
+    label: 'Register',
+    icon: 'app_registration',
+    route: 'register'
+  }
 ]
 
 export const COUNTRIES = [
