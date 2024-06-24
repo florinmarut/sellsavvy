@@ -13,7 +13,7 @@ import { PagedData } from '../../models/dtos/paged.model';
 @Injectable({
   providedIn: 'root',
 })
-export class productsService {
+export class ProductsService {
   private readonly ROUTE = this._config.getConfig().addresses['products'];
 
   constructor(

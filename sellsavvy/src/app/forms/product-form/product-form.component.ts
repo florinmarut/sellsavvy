@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { productsService } from '../../services/apis/products.service';
+import { ProductsService } from '../../services/apis/products.service';
 import {
   FormBuilder,
   FormGroup,
@@ -52,7 +52,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   postproductSubscription!: Subscription;
 
   constructor(
-    private readonly _productsService: productsService,
+    private readonly _productsService: ProductsService,
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService,
     private readonly _route: ActivatedRoute,
@@ -80,7 +80,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             stock: [product.stock, [Validators.required]],
           });
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           this._router.navigate(['/fail']);
         },

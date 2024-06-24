@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PagedTableComponent } from '../../components/paged-table/paged-table.component';
 import { AuthenticationService } from '../../services/authentication.service';
-import { productsService } from '../../services/apis/products.service';
+import { ProductsService } from '../../services/apis/products.service';
 import {
   Observable,
   Subject,
@@ -17,25 +17,34 @@ import { PagedData } from '../../models/dtos/paged.model';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'products-page',
   standalone: true,
-  imports: [PagedTableComponent, MatButtonModule, MatIconModule],
+  imports: [
+    PagedTableComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatPaginatorModule,
+  ],
   templateUrl: './products-page.component.html',
-  styleUrl: './products-page.component.scss',
+  styleUrls: ['./products-page.component.scss'],
 })
 export class ProductsPageComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   user: UserDTO | undefined;
   pagedproducts: PagedData<ProductDTO> | undefined;
   canEdit: boolean = false;
+  pageSize: number = 5;
+  pageNumber: number = 1;
 
   constructor(
     private readonly _authService: AuthenticationService,
-    private readonly _productsService: productsService,
+    private readonly _productsService: ProductsService,
     private readonly _router: Router
   ) {}
+
   ngOnInit(): void {
     let fetchProfileAndProducts$ = this._authService.getProfile().pipe(
       takeUntil(this.destroy$),
@@ -44,14 +53,18 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
         this.user = user;
         return user;
       }),
-      switchMap((user: UserDTO) => this.fetchproducts(user))
+      switchMap((user: UserDTO) =>
+        this.fetchProducts(user, this.pageNumber, this.pageSize)
+      )
     );
 
     this._authService.isLoggedIn
       .pipe(
         map((isUserLoggedIn) => isUserLoggedIn),
         switchMap((isUserLoggedIn) =>
-          isUserLoggedIn ? fetchProfileAndProducts$ : this.fetchproducts(null)
+          isUserLoggedIn
+            ? fetchProfileAndProducts$
+            : this.fetchProducts(undefined, this.pageNumber, this.pageSize)
         )
       )
       .subscribe({
@@ -61,12 +74,32 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
         error: (err) => console.error(err),
       });
   }
-  fetchproducts(user: UserDTO | null): Observable<PagedData<ProductDTO>> {
+
+  fetchProducts(
+    user: UserDTO | undefined,
+    pageNumber: number,
+    pageSize: number
+  ): Observable<PagedData<ProductDTO>> {
     if (this._router.url === '/my-products') {
       this.canEdit = true;
-      return this._productsService.getPaged(1, 5, `SellerId == "${user?.id}"`);
+      return this._productsService.getPaged(
+        pageNumber,
+        pageSize,
+        `SellerId == "${user?.id}"`
+      );
     }
-    return this._productsService.getPaged(1, 5);
+    return this._productsService.getPaged(pageNumber, pageSize);
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageNumber = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.fetchProducts(this.user, this.pageNumber, this.pageSize).subscribe({
+      next: (pagedproducts) => {
+        this.pagedproducts = pagedproducts;
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   addProduct() {

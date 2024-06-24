@@ -1,31 +1,37 @@
 .container {
-    position: relative;
-  }
-  
+  position: relative;
+  padding-bottom: 50px; /* Add padding to ensure space for the paginator */
+}
+
+.add-product-button {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+}
+
+/* For desktop */
+@media (min-width: 768px) {
   .add-product-button {
-    position: absolute;
-    top: 20px; /* Adjust as needed */
+    top: 20px;
+    right: 20px; /* Align to the top right corner */
+    left: auto;
   }
-  
-  /* For desktop */
-  @media (min-width: 768px) {
-    .add-product-button {
-      top: 20px;
-      right: 20px; /* Align to the top right corner */
-      left: auto;
-    }
+}
+
+/* For mobile */
+@media (max-width: 767px) {
+  .add-product-button {
+    position: relative;
+    margin-top: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px; /* Adjust as needed */
   }
-  
-  /* For mobile */
-  @media (max-width: 767px) {
-    .add-product-button {
-      position: relative;
-      margin-top: 50px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%;
-      max-width: 300px; /* Adjust as needed */
-    }
-  }
-  
+}
+
+.paginator-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Add margin to separate from the table */
+}

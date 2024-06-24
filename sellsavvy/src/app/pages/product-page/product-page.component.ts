@@ -13,7 +13,7 @@ import {
   switchMap,
   throwError,
 } from 'rxjs';
-import { productsService } from '../../services/apis/products.service';
+import { ProductsService } from '../../services/apis/products.service';
 import { ReviewCreateDTO, ReviewDTO } from '../../models/dtos/review.model';
 import { ReviewsService } from '../../services/apis/reviews.service';
 import { PagedData } from '../../models/dtos/paged.model';
@@ -49,7 +49,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly _route: ActivatedRoute,
-    private readonly _productsService: productsService,
+    private readonly _productsService: ProductsService,
     private readonly _reviewsService: ReviewsService,
     private readonly _formBuilder: FormBuilder,
     private readonly _authService: AuthenticationService

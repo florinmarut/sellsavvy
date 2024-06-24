@@ -11,11 +11,12 @@ import { ProductDTO } from '../../models/dtos/product.model';
 import { UserDTO } from '../../models/dtos/user.model';
 import { Subject, takeUntil } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'paged-table',
@@ -28,6 +29,7 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatIconModule,
     CommonModule,
+    MatPaginatorModule
   ],
   templateUrl: './paged-table.component.html',
   styleUrl: './paged-table.component.scss',
@@ -38,6 +40,8 @@ export class PagedTableComponent implements OnInit, OnDestroy {
   @Input() loggedInUser: UserDTO | undefined;
   @Input() canEdit: boolean = false;
 
+  currentPage = 0;
+  pageSize = 10;
   destroyed = new Subject<void>();
 
   @HostListener('window:resize', ['$event'])
@@ -49,7 +53,7 @@ export class PagedTableComponent implements OnInit, OnDestroy {
     this.columns = width <= 768 ? 1 : 4;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
   trackProduct(index: number, product: ProductDTO): string {
     return product.id;

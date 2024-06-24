@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { CartItemsService } from '../../services/apis/cart-items.service';
 import { CartItemCreateDTO } from '../../models/dtos/cart-item.model';
 import { UserDTO } from '../../models/dtos/user.model';
-import { productsService } from '../../services/apis/products.service';
+import { ProductsService } from '../../services/apis/products.service';
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 
 @Component({
@@ -25,7 +25,7 @@ export class ProductCardComponent {
   constructor(
     private readonly _router: Router,
     private readonly _cartService: CartItemsService,
-    private readonly _productsService: productsService
+    private readonly _productsService: ProductsService
   ) {}
 
   viewProduct() {
