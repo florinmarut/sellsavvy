@@ -1,14 +1,14 @@
 .product-container {
   display: flex;
-  flex-direction: column; // Stack elements vertically by default
+  flex-direction: column;
   gap: 20px;
   border: 1px solid #eee;
   border-radius: 8px;
   padding: 20px;
 
   .product-image {
-    flex: 0 0 100%; // Take full width on smaller screens
-    order: 1; // Place the image first
+    flex: 0 0 100%;
+    order: 1;
 
     img {
       max-width: 100%;
@@ -17,13 +17,13 @@
     }
 
     @media (min-width: 768px) {
-      flex: 0 0 40%; // Fixed width on larger screens to prevent oversized images
+      flex: 0 0 40%;
     }
   }
 
   .product-details {
-    flex: 1; // Takes up available space
-    order: 2; // Position the details beneath the image
+    flex: 1;
+    order: 2;
 
     .product-title {
       font-size: 22px;
@@ -38,7 +38,6 @@
 
       span {
         &:not(:last-child) {
-          // Add margin to all but the last span
           margin-right: 20px;
         }
 
@@ -46,32 +45,30 @@
         font-size: 16px;
 
         .rating {
-          color: #ffc107; // Yellow for rating stars
+          color: #ffc107;
         }
       }
     }
 
     button[mat-raised-button] {
       padding: 12px 20px;
-      font-weight: 500; // Slightly bolder text
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Subtle button shadow
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     @media (min-width: 768px) {
-      // Tablet and larger screens
-      flex-direction: row; // Switch back to the side-by-side layout
+      flex-direction: row;
     }
   }
 
   @media (min-width: 768px) {
-    // Example breakpoint for tablets
-    flex-direction: row; // Switch to the side-by-side layout on larger screens
+    flex-direction: row;
   }
 }
 
 .product-reviews {
   margin-top: 30px;
-  order: 3; // Move reviews to the bottom
+  order: 3;
 
   .reviews-title {
     font-size: 20px;

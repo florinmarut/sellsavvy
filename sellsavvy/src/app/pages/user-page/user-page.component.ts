@@ -38,11 +38,10 @@ export class UserPageComponent {
   }
 
   loadUserProfile(): void {
-    const userId = this.route.snapshot.paramMap.get('id'); // Get user ID from route params
+    const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
       this.usersService.getUser(userId).subscribe((user: UserDTO) => {
         this.user = user;
-        // Check if the logged-in user is following this user
         this.checkIfFollowing();
       });
     }

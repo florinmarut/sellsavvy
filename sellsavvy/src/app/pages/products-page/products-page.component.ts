@@ -113,7 +113,7 @@ export class ProductsPageComponent implements OnInit, OnDestroy {
 
   onSearchButtonClick(searchValue: string): void {
     this.filters = `Title.ToLower().Contains("${searchValue.toLowerCase()}")`;
-    this.pageNumber = 1; // Reset to first page on search
+    this.pageNumber = 1;
     this.fetchProducts(this.user, this.pageNumber, this.pageSize).subscribe({
       next: (pagedproducts) => {
         this.pagedproducts = pagedproducts;

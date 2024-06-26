@@ -64,11 +64,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
 
-    // Fetch the user profile first
     const userSubscription = this._authService.user.subscribe((user) => {
       this.loggedInUser = user;
 
-      // Continue to fetch product data only after user details are obtained
       const fetchData$ = this._route.paramMap.pipe(
         map((params) => params.get('id')),
         switchMap((id) => {

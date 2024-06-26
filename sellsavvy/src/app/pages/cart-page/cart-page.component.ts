@@ -81,7 +81,6 @@ export class CartPageComponent implements OnInit, OnDestroy {
       }),
       switchMap((user: UserDTO) =>
         forkJoin([
-          // Execute requests in parallel
           this.fetchCartItems(user),
           this.fetchAddresses(user),
         ])

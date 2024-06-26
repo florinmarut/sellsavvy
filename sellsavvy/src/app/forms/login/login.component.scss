@@ -2,16 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%; // Use percentage for better responsiveness
-  max-width: 400px; // Maintain a maximum width for larger screens
+  width: 90%;
+  max-width: 400px;
   padding: 20px;
-  margin: 20px auto; // Adjust margins for smaller screens
+  margin: 20px auto;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 
   @media (max-width: 667px) {
-    // For your mobile screen size
-    width: 95%; // Take almost full width on mobile
+    width: 95%;
     padding: 15px;
   }
 
@@ -27,8 +26,8 @@
 
   .button--disabled {
     background-color: gray;
-    opacity: 0.6; // Slightly faded when disabled
-    cursor: default; // Indicate non-clickable state
+    opacity: 0.6;
+    cursor: default;
   }
 
   &mat-error {
@@ -40,9 +39,9 @@
 
 .spinner-container {
   display: flex;
-  flex-direction: column; // Arrange content vertically
-  align-items: center; // Horizontal centering
-  justify-content: center; // Vertical centering
-  height: 100vh; // Ensure the container takes full viewport height
-  min-height: 300px; // A minimum height in case content is smaller
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  min-height: 300px;
 }
