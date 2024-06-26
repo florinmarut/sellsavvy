@@ -17,7 +17,7 @@
       <span class="stock"> In Stock: {{ product?.stock }} </span>
     </div>
 
-    <button mat-raised-button color="primary">Add to Cart</button>
+    <button mat-raised-button color="primary" [disabled]="isAddedToCart" (click)="addToCart()">{{isAddedToCart ? 'Added to Cart' : 'Add to Cart'}}</button>
   </div>
 
   <div class="product-reviews">
@@ -28,8 +28,8 @@
       {{ review.rating }}/5
       <p class="review-comment">{{ review.comment }}</p>
       <p class="review-reviewer">
-        — {{ review.user?.firstName ?? "Anonymous" }},
-        {{ review.user?.lastName ?? "User" }}
+        — {{ review.user?.firstName ?? "John" }}
+        {{ review.user?.lastName ?? "Doe" }}
       </p>
     </div>
 

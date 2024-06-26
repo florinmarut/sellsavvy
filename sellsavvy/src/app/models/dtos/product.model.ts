@@ -38,4 +38,5 @@ export interface ProductDTO {
   seller: UserDTO;
   reviews: Array<ReviewDTO>;
   isAvailable: boolean;
+  presignedUrls: string[];
 }

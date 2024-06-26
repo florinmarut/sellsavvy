@@ -25,6 +25,9 @@ import {
 } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ProductDTO } from '../../models/dtos/product.model';
+import { CartItemCreateDTO } from '../../models/dtos/cart-item.model';
+import { CartItemsService } from '../../services/apis/cart-items.service';
+import { UserDTO } from '../../models/dtos/user.model';
 
 @Component({
   selector: 'product-page',
@@ -44,6 +47,8 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   product: ProductDTO | undefined;
   reviews: PagedData<ReviewDTO> | undefined;
   reviewForm!: FormGroup;
+  loggedInUser: UserDTO | null | undefined;
+  isAddedToCart: boolean = false;
 
   subscriptions: Subscription[] = [];
 
@@ -52,46 +57,73 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     private readonly _productsService: ProductsService,
     private readonly _reviewsService: ReviewsService,
     private readonly _formBuilder: FormBuilder,
-    private readonly _authService: AuthenticationService
+    private readonly _authService: AuthenticationService,
+    private readonly _cartService: CartItemsService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
 
-    const fetchData$ = this._route.paramMap.pipe(
-      map((params) => params.get('id')),
-      switchMap((id) => {
-        return combineLatest([
-          this._productsService.getproduct(id as string),
-          this._reviewsService.getPagedReviews(
-            1,
-            15,
-            `ProductId==\"${id}\"`,
-            'id',
-            'desc'
-          ),
-        ]);
-      }),
-      catchError((error) => {
-        return throwError(() => error);
-      })
-    );
+    // Fetch the user profile first
+    const userSubscription = this._authService.user.subscribe((user) => {
+      this.loggedInUser = user;
 
-    const fetchDataSubscription = fetchData$.subscribe({
-      next: ([product, reviews]) => {
-        this.product = product;
-        this.reviews = reviews;
-      },
-      error: (err) => console.error(err),
+      // Continue to fetch product data only after user details are obtained
+      const fetchData$ = this._route.paramMap.pipe(
+        map((params) => params.get('id')),
+        switchMap((id) => {
+          if (!id) {
+            throw new Error('Product ID is required');
+          }
+          return combineLatest([
+            this._productsService.getproduct(id),
+            this._reviewsService.getPagedReviews(
+              1,
+              15,
+              `ProductId=="${id}"`,
+              'id',
+              'desc'
+            ),
+          ]);
+        }),
+        catchError((error) => {
+          console.error('Failed to fetch product or reviews', error);
+          return throwError(() => error);
+        })
+      );
+
+      const fetchDataSubscription = fetchData$.subscribe({
+        next: ([product, reviews]) => {
+          this.product = product;
+          this.reviews = reviews;
+        },
+        error: (err) => console.error(err),
+      });
+
+      this.subscriptions.push(fetchDataSubscription);
     });
 
-    this.subscriptions.push(fetchDataSubscription);
+    this.subscriptions.push(userSubscription);
   }
 
   initForm() {
     this.reviewForm = this._formBuilder.group({
       comment: ['', Validators.required],
       rating: ['', Validators.required],
+    });
+  }
+
+  addToCart() {
+    const cartItem: CartItemCreateDTO = {
+      amount: 1,
+      productId: this.product?.id ?? '',
+      userId: this.loggedInUser?.id ?? '',
+    };
+    this._cartService.createCartItem(cartItem).subscribe({
+      next: (value) => {
+        this.isAddedToCart = true;
+      },
+      error: (err) => console.error(err),
     });
   }
 
