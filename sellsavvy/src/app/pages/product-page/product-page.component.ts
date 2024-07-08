@@ -45,7 +45,7 @@ import { UserDTO } from '../../models/dtos/user.model';
 })
 export class ProductPageComponent implements OnInit, OnDestroy {
   product: ProductDTO | undefined;
-  reviews: PagedData<ReviewDTO> | undefined;
+  reviews: ReviewDTO[] = [];
   reviewForm!: FormGroup;
   loggedInUser: UserDTO | null | undefined;
   isAddedToCart: boolean = false;
@@ -75,13 +75,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
           }
           return combineLatest([
             this._productsService.getproduct(id),
-            this._reviewsService.getPagedReviews(
-              1,
-              15,
-              `ProductId=="${id}"`,
-              'id',
-              'desc'
-            ),
+            this._reviewsService.getReviews({ productId: id }),
           ]);
         }),
         catchError((error) => {
@@ -142,13 +136,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
       switchMap((review) =>
         combineLatest([
           this._reviewsService.createReview(review),
-          this._reviewsService.getPagedReviews(
-            1,
-            15,
-            `productId==\"${review.productId}\"`,
-            'id',
-            'desc'
-          ),
+          this._reviewsService.getReviews({ productId: this.product?.id }),
         ])
       ),
       catchError((error) => throwError(() => error))

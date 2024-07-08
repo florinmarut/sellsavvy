@@ -17,13 +17,20 @@
       <span class="stock"> In Stock: {{ product?.stock }} </span>
     </div>
 
-    <button mat-raised-button color="primary" [disabled]="isAddedToCart" (click)="addToCart()">{{isAddedToCart ? 'Added to Cart' : 'Add to Cart'}}</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="isAddedToCart"
+      (click)="addToCart()"
+    >
+      {{ isAddedToCart ? "Added to Cart" : "Add to Cart" }}
+    </button>
   </div>
 
   <div class="product-reviews">
     <h3 class="reviews-title">Reviews</h3>
 
-    <div class="review" *ngFor="let review of reviews?.items">
+    <div class="review" *ngFor="let review of reviews">
       <mat-icon *ngIf="review.rating" class="review-rating">star</mat-icon>
       {{ review.rating }}/5
       <p class="review-comment">{{ review.comment }}</p>
